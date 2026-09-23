@@ -1,59 +1,174 @@
+<script>
+	let { data } = $props();
+</script>
+
 <svelte:head>
-	<title>Home — Studio Folio</title>
-	<meta name="description" content="Portfolio of design, creative engineering, and digital craft." />
+	<title>Studio Folio — Design Engineer &amp; Frontend Architect</title>
+	<meta name="description" content="Personal portfolio of design systems, web engineering, and crafted digital experiences." />
+	<meta property="og:title" content="Studio Folio — Design Engineer & Frontend Architect" />
+	<meta property="og:description" content="Personal portfolio of design systems, web engineering, and crafted digital experiences." />
+	<meta property="og:type" content="website" />
+	<meta name="twitter:card" content="summary_large_image" />
 </svelte:head>
 
-<section class="max-w-3xl space-y-12">
-	<!-- Hero Intro -->
-	<div class="space-y-4">
-		<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-light-border dark:border-dark-border text-xs font-medium text-accent dark:text-accent-dark bg-accent-light/50 dark:bg-accent/15">
+<div class="space-y-20 sm:space-y-28">
+	<!-- Hero Section -->
+	<section class="max-w-4xl space-y-8 pt-4 sm:pt-8">
+		<!-- Status Indicator -->
+		<div class="inline-flex items-center gap-2.5 px-3.5 py-1 rounded-full border border-light-border dark:border-dark-border text-xs font-medium text-accent dark:text-accent-dark bg-accent-light/40 dark:bg-accent/15">
 			<span class="w-1.5 h-1.5 rounded-full bg-accent dark:bg-accent-dark animate-pulse"></span>
-			<span>Available for select projects</span>
+			<span>Tersedia untuk proyek terpilih &amp; kolaborasi</span>
 		</div>
 
-		<h1 class="font-serif text-4xl sm:text-6xl lg:text-7xl font-normal tracking-tight text-ink dark:text-dark-text leading-[1.08]">
-			Designing thoughtful digital experiences with craft &amp; purpose.
-		</h1>
+		<!-- Main Hero Headline -->
+		<div class="space-y-6">
+			<h1 class="font-serif text-4xl sm:text-6xl lg:text-7xl font-normal tracking-tight text-ink dark:text-dark-text leading-[1.06]">
+				Membangun ruang digital dengan presisi desain &amp; arsitektur kode modern.
+			</h1>
 
-		<p class="font-sans text-lg sm:text-xl text-light-muted dark:text-dark-muted font-light leading-relaxed max-w-2xl pt-2">
-			Selamat datang di ruang portofolio saya. Di sini Anda akan menemukan kurasi karya desain antarmuka, rekayasa perangkat lunak, dan eksplorasi tipografi modern.
-		</p>
-	</div>
+			<p class="font-sans text-lg sm:text-2xl text-light-muted dark:text-dark-muted font-light leading-relaxed max-w-2xl">
+				Saya seorang <span class="text-ink dark:text-dark-text font-normal">Design Technologist</span> yang berfokus pada tipografi editorial yang tenang, sistem desain modular, dan aplikasi web statis berkinerja tinggi.
+			</p>
+		</div>
 
-	<!-- Action Links -->
-	<div class="flex flex-wrap items-center gap-4 pt-2">
-		<a
-			href="/projects/"
-			class="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-accent text-white hover:bg-accent-hover font-medium text-sm transition-colors duration-150 shadow-sm"
-		>
-			Lihat Proyek
-		</a>
-		<a
-			href="/about/"
-			class="inline-flex items-center justify-center px-6 py-3 rounded-lg border border-light-border dark:border-dark-border bg-light-surface/60 dark:bg-dark-surface/60 text-ink dark:text-dark-text hover:border-accent dark:hover:border-accent-dark font-medium text-sm transition-colors duration-150"
-		>
-			Tentang Saya
-		</a>
-	</div>
+		<!-- Action Links -->
+		<div class="flex flex-wrap items-center gap-4 pt-2">
+			<a
+				href="/projects/"
+				class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-accent text-white hover:bg-accent-hover font-medium text-sm transition-all duration-150 shadow-sm"
+			>
+				<span>Eksplorasi Proyek</span>
+				<span>→</span>
+			</a>
+			<a
+				href="/about/"
+				class="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-light-border dark:border-dark-border bg-light-surface/60 dark:bg-dark-surface/60 text-ink dark:text-dark-text hover:border-accent dark:hover:border-accent-dark font-medium text-sm transition-colors duration-150"
+			>
+				<span>Tentang Saya</span>
+			</a>
+			<a
+				href="/contact/"
+				class="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-light-border dark:border-dark-border bg-light-surface/60 dark:bg-dark-surface/60 text-light-muted dark:text-dark-muted hover:text-ink dark:hover:text-dark-text hover:border-accent dark:hover:border-accent-dark font-medium text-sm transition-colors duration-150"
+			>
+				<span>Hubungi Langsung</span>
+			</a>
+		</div>
+	</section>
 
-	<!-- Foundation Status Card -->
-	<div class="pt-8 border-t border-light-border dark:border-dark-border">
-		<div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-			<div class="p-5 rounded-xl border border-light-border dark:border-dark-border bg-light-surface/40 dark:bg-dark-surface/40">
-				<p class="text-xs uppercase tracking-widest text-light-muted dark:text-dark-muted mb-1">Framework</p>
-				<p class="font-semibold text-base text-ink dark:text-dark-text">SvelteKit 2</p>
-				<p class="text-xs text-light-muted dark:text-dark-muted mt-1">Svelte 5 runes &amp; SSG static adapter</p>
+	<!-- Hairline Divider -->
+	<div class="w-full h-px bg-light-border dark:bg-dark-border"></div>
+
+	<!-- Featured Projects Section -->
+	<section class="space-y-10">
+		<div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+			<div class="space-y-2">
+				<p class="text-xs uppercase tracking-widest text-accent dark:text-accent-dark font-medium">Karya Terpilih</p>
+				<h2 class="font-serif text-3xl sm:text-4xl font-normal text-ink dark:text-dark-text tracking-tight">
+					Proyek Unggulan
+				</h2>
 			</div>
-			<div class="p-5 rounded-xl border border-light-border dark:border-dark-border bg-light-surface/40 dark:bg-dark-surface/40">
-				<p class="text-xs uppercase tracking-widest text-light-muted dark:text-dark-muted mb-1">Styling</p>
-				<p class="font-semibold text-base text-ink dark:text-dark-text">Tailwind CSS</p>
-				<p class="text-xs text-light-muted dark:text-dark-muted mt-1">Custom warm palette &amp; class strategy</p>
-			</div>
-			<div class="p-5 rounded-xl border border-light-border dark:border-dark-border bg-light-surface/40 dark:bg-dark-surface/40">
-				<p class="text-xs uppercase tracking-widest text-light-muted dark:text-dark-muted mb-1">Typography</p>
-				<p class="font-semibold text-base text-ink dark:text-dark-text">Instrument &amp; Geist</p>
-				<p class="text-xs text-light-muted dark:text-dark-muted mt-1">Editorial serif + crisp sans-serif</p>
+
+			<a
+				href="/projects/"
+				class="group inline-flex items-center gap-1.5 text-sm font-medium text-accent dark:text-accent-dark hover:underline"
+			>
+				<span>Lihat seluruh arsip ({data.featuredProjects.length})</span>
+				<span class="transition-transform duration-150 group-hover:translate-x-1">→</span>
+			</a>
+		</div>
+
+		<!-- Featured Grid (Hairline Cards) -->
+		<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+			{#each data.featuredProjects as project, index}
+				<a
+					href="/projects/{project.slug}/"
+					class="group flex flex-col justify-between rounded-2xl border border-light-border dark:border-dark-border bg-light-surface/40 dark:bg-dark-surface/40 hover:border-accent/40 dark:hover:border-accent-dark/40 overflow-hidden transition-all duration-200"
+				>
+					<!-- Mockup Header -->
+					<div class="p-4 border-b border-light-border dark:border-dark-border bg-light-surface/70 dark:bg-dark-surface/70">
+						<div class="overflow-hidden rounded-xl bg-paper dark:bg-dark-bg aspect-[16/11]">
+							<img
+								src={project.image}
+								alt={project.title}
+								class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+								loading="lazy"
+							/>
+						</div>
+					</div>
+
+					<!-- Details -->
+					<div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+						<div class="space-y-2">
+							<div class="flex items-center justify-between text-xs text-light-muted dark:text-dark-muted">
+								<span class="font-medium text-accent dark:text-accent-dark">{project.category}</span>
+								<span>{project.year}</span>
+							</div>
+
+							<h3 class="font-serif text-xl sm:text-2xl font-normal text-ink dark:text-dark-text group-hover:text-accent dark:group-hover:text-accent-dark transition-colors duration-150">
+								{project.title}
+							</h3>
+
+							<p class="font-sans text-xs sm:text-sm text-light-muted dark:text-dark-muted font-light leading-relaxed line-clamp-3">
+								{project.description}
+							</p>
+						</div>
+
+						<div class="pt-4 border-t border-light-border/60 dark:border-dark-border/60 flex items-center justify-between">
+							<span class="text-xs font-medium text-accent dark:text-accent-dark group-hover:underline flex items-center gap-1">
+								<span>Buka detail</span>
+								<span class="transition-transform duration-150 group-hover:translate-x-1">→</span>
+							</span>
+							<span class="text-xs text-light-muted dark:text-dark-muted font-mono">0{index + 1}</span>
+						</div>
+					</div>
+				</a>
+			{/each}
+		</div>
+	</section>
+
+	<!-- Hairline Divider -->
+	<div class="w-full h-px bg-light-border dark:bg-dark-border"></div>
+
+	<!-- Quick Links & Philosophy Section -->
+	<section class="grid grid-cols-1 md:grid-cols-2 gap-8 p-8 sm:p-12 rounded-3xl border border-light-border dark:border-dark-border bg-light-surface/30 dark:bg-dark-surface/30">
+		<div class="space-y-4">
+			<p class="text-xs uppercase tracking-widest text-accent dark:text-accent-dark font-medium">Filosofi</p>
+			<h2 class="font-serif text-2xl sm:text-3xl font-normal text-ink dark:text-dark-text">
+				Kejelasan di atas kerumitan visual.
+			</h2>
+			<p class="font-sans text-sm sm:text-base text-light-muted dark:text-dark-muted font-light leading-relaxed">
+				Setiap piksel dan baris kode dibangun dengan tujuan yang jelas. Tanpa animasi berlebihan yang mengganggu keterbacaan, setiap tata letak dirancang untuk memberikan pengalaman yang mulus dan abadi.
+			</p>
+			<div class="pt-2">
+				<a
+					href="/about/"
+					class="text-sm font-medium text-accent dark:text-accent-dark hover:underline flex items-center gap-1.5"
+				>
+					<span>Pelajari pendekatan &amp; latar belakang saya</span>
+					<span>→</span>
+				</a>
 			</div>
 		</div>
-	</div>
-</section>
+
+		<div class="space-y-4 md:border-l md:border-light-border dark:md:border-dark-border md:pl-8 flex flex-col justify-between">
+			<div class="space-y-3">
+				<p class="text-xs uppercase tracking-widest text-light-muted dark:text-dark-muted font-medium">Memulai Kolaborasi</p>
+				<h3 class="font-serif text-xl sm:text-2xl font-normal text-ink dark:text-dark-text">
+					Punya ide atau proyek yang ingin direalisasikan?
+				</h3>
+				<p class="font-sans text-sm text-light-muted dark:text-dark-muted font-light leading-relaxed">
+					Terbuka untuk konsultasi desain antarmuka, perancangan sistem desain, atau pengembangan web statis berkinerja tinggi.
+				</p>
+			</div>
+
+			<div class="pt-4">
+				<a
+					href="/contact/"
+					class="inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-accent text-white hover:bg-accent-hover font-medium text-sm transition-colors"
+				>
+					Kirim Pesan Langsung ↗
+				</a>
+			</div>
+		</div>
+	</section>
+</div>
