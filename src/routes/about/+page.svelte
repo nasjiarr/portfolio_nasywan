@@ -35,7 +35,7 @@
 				</div>
 				<div class="pt-3 border-t border-light-border dark:border-dark-border text-xs text-light-muted dark:text-dark-muted space-y-1.5">
 					<p class="flex items-center gap-2">
-						<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+						<span class="w-1.5 h-1.5 rounded-full bg-accent dark:bg-accent-dark"></span>
 						<span>Berbasis di Jakarta (UTC+7)</span>
 					</p>
 					<p>Bahasa: Indonesia, English</p>

@@ -5,34 +5,28 @@ export default {
 	theme: {
 		extend: {
 			colors: {
-				paper: '#FAFAF7', // Warm off-white
-				ink: '#0D0D0D', // Near-black text
+				paper: '#F4F6F8', // Cold Nordic Frost White
+				ink: '#090C10', // Cold Carbon Obsidian
 				dark: {
-					bg: '#0A0A0A', // Near-black dark background
-					surface: '#141414',
-					border: '#242424',
-					text: '#F5F5F0', // Off-white dark text
-					muted: '#94948C'
+					bg: '#07090D', // Glacial Void / Deep Obsidian
+					surface: '#0E1117', // Cold Slate Surface
+					border: '#1A202C', // Hairline Frosted Steel Border
+					text: '#F0F3F8', // Frosted Platinum
+					muted: '#8C96A8' // Cold Mist Slate
 				},
 				light: {
-					bg: '#FAFAF7',
+					bg: '#F4F6F8',
 					surface: '#FFFFFF',
-					border: '#E7E7E0',
-					text: '#0D0D0D',
-					muted: '#6E6E66'
+					border: '#E2E5EB', // Hairline Cool Platinum Border
+					text: '#090C10',
+					muted: '#5B6371' // Cold Steel Grey
 				},
 				accent: {
-					DEFAULT: '#1B4D3E', // Deep Emerald understated accent
-					hover: '#143B30',
-					light: '#E7F2EE',
-					dark: '#34D399',
-					muted: '#2A6653'
-				},
-				gold: {
-					DEFAULT: '#B48C36', // Muted Gold accent option
-					hover: '#96742A',
-					light: '#F8F4EA',
-					dark: '#D4AA50'
+					DEFAULT: '#1248A6', // Architectural Cold Azure / Cobalt
+					hover: '#0C3782', // Deep Arctic Cobalt
+					light: '#E8EEFA', // Icy Azure Tint
+					dark: '#38BDF8', // Luminous Glacial Cyan
+					muted: '#1E3A8A'
 				}
 			},
 			fontFamily: {

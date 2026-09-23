@@ -1,5 +1,6 @@
 <script>
 	import { reveal, curtainReveal, magnetic, parallax } from '$lib/animations';
+	import ResponsiveImage from '$lib/components/ResponsiveImage.svelte';
 
 	let { data } = $props();
 	const Content = $derived(data.component);
@@ -110,15 +111,21 @@
 		{/each}
 	</div>
 
-	<!-- Hero Mockup Showcase with Scroll-based Parallax -->
+	<!-- Hero Mockup Showcase with Scroll-based Parallax & High Priority LCP -->
 	<figure use:reveal={{ delay: 120, y: 20 }} class="rounded-2xl border border-light-border dark:border-dark-border overflow-hidden bg-light-surface dark:bg-dark-surface p-2 sm:p-4 shadow-sm">
 		<div class="overflow-hidden rounded-xl relative">
-			<img
-				use:parallax={{ speed: 36 }}
+			<ResponsiveImage
 				src={data.metadata.image}
 				alt="Pratinjau visual {data.metadata.title}"
 				class="w-full h-auto rounded-xl object-cover scale-[1.05]"
 				loading="eager"
+				fetchpriority="high"
+				decoding="async"
+				width={1200}
+				height={750}
+				sizes="(max-width: 896px) 100vw, 896px"
+				action={parallax}
+				actionParam={{ speed: 36 }}
 			/>
 		</div>
 	</figure>

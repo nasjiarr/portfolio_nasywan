@@ -1,7 +1,6 @@
-import Lenis from 'lenis';
 import { initGSAP } from './gsapHelper.js';
 
-/** @type {Lenis | null} */
+/** @type {import('lenis').default | null} */
 let lenisInstance = null;
 
 /** @type {((time: number) => void) | null} */
@@ -12,10 +11,11 @@ let anchorClickHandler = null;
 
 /**
  * Initializes Lenis smooth scrolling with GSAP ScrollTrigger synchronization.
+ * Uses dynamic import to lazy-load the Lenis library without blocking initial render.
  * If prefers-reduced-motion is active or running in SSR, it safely bypasses Lenis.
- * @returns {Lenis | null}
+ * @returns {Promise<import('lenis').default | null>}
  */
-export function initSmoothScroll() {
+export async function initSmoothScroll() {
 	if (typeof window === 'undefined') return null;
 
 	// Respect prefers-reduced-motion: fallback to native instant scroll
@@ -26,6 +26,9 @@ export function initSmoothScroll() {
 	if (lenisInstance) {
 		return lenisInstance;
 	}
+
+	// Dynamically import Lenis on client
+	const { default: Lenis } = await import('lenis');
 
 	lenisInstance = new Lenis({
 		duration: 1.15,
@@ -74,7 +77,7 @@ export function initSmoothScroll() {
 
 /**
  * Returns current Lenis instance if active.
- * @returns {Lenis | null}
+ * @returns {import('lenis').default | null}
  */
 export function getLenis() {
 	return lenisInstance;

@@ -1,5 +1,6 @@
 <script>
 	import { reveal, magnetic, curtainReveal, wordReveal } from '$lib/animations';
+	import ResponsiveImage from '$lib/components/ResponsiveImage.svelte';
 
 	let { data } = $props();
 </script>
@@ -101,11 +102,15 @@
 						<!-- Mockup Header with Smooth Zoom & Gradient Overlay -->
 						<div class="p-4 border-b border-light-border dark:border-dark-border bg-light-surface/70 dark:bg-dark-surface/70">
 							<div class="overflow-hidden rounded-xl bg-paper dark:bg-dark-bg aspect-[16/11] relative">
-								<img
+								<ResponsiveImage
 									src={project.image}
 									alt={project.title}
 									class="card-zoom-img w-full h-full object-cover"
 									loading="lazy"
+									decoding="async"
+									width={800}
+									height={550}
+									sizes="(max-width: 768px) 100vw, 33vw"
 								/>
 								<!-- Subtle dark gradient overlay appearing smoothly on hover -->
 								<div class="absolute inset-0 bg-gradient-to-t from-black/30 via-black/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>

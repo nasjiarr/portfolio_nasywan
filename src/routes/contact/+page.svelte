@@ -38,7 +38,7 @@
 	<!-- Page Header with Curtain Reveal -->
 	<header class="space-y-4 max-w-3xl">
 		<div class="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-accent dark:text-accent-dark font-medium">
-			<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+			<span class="w-1.5 h-1.5 rounded-full bg-accent dark:bg-accent-dark"></span>
 			<span>Terbuka untuk Diskusi Proyek</span>
 		</div>
 
