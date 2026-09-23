@@ -4,7 +4,7 @@
 	import Navbar from '$lib/components/Navbar.svelte';
 	import Preloader from '$lib/components/Preloader.svelte';
 	import { onNavigate } from '$app/navigation';
-	import { CustomCursor, initGSAP, initSmoothScroll, getLenis, destroySmoothScroll } from '$lib/animations';
+	import { CustomCursor, initGSAP, initSmoothScroll, getLenis, destroySmoothScroll, shouldReduceMotion } from '$lib/animations';
 
 	let { children } = $props();
 
@@ -36,7 +36,7 @@
 		}
 
 		// Strictly respect prefers-reduced-motion setting
-		if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+		if (shouldReduceMotion()) {
 			return;
 		}
 
@@ -65,15 +65,15 @@
 <!-- Custom Interactive Magnetic / Trailing Cursor (Disabled on mobile/touch & reduced motion) -->
 <CustomCursor />
 
-<div class="min-h-screen flex flex-col bg-paper text-ink dark:bg-dark-bg dark:text-dark-text selection:bg-accent-light dark:selection:bg-accent/30 selection:text-accent dark:selection:text-accent-dark transition-colors duration-200">
+<div class="min-h-screen flex flex-col bg-paper text-ink dark:bg-dark-bg dark:text-dark-text selection:bg-accent-light dark:selection:bg-accent/30 selection:text-accent dark:selection:text-accent-dark transition-colors duration-200 overflow-x-clip">
 	<Navbar />
 
-	<main class="flex-1 w-full max-w-5xl mx-auto px-6 py-10 sm:py-16">
+	<main class="flex-1 w-full max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-12 md:py-16">
 		{@render children()}
 	</main>
 
-	<footer class="w-full border-t border-light-border dark:border-dark-border py-8 text-center text-xs text-light-muted dark:text-dark-muted transition-colors duration-200">
-		<div class="max-w-5xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+	<footer class="w-full border-t border-light-border dark:border-dark-border py-8 pb-[max(2rem,env(safe-area-inset-bottom))] text-center text-xs text-light-muted dark:text-dark-muted transition-colors duration-200">
+		<div class="max-w-5xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
 			<p>© {new Date().getFullYear()} Studio Folio. All rights reserved.</p>
 			<p class="font-serif italic text-sm text-ink/70 dark:text-dark-text/70">Crafted with precision &amp; care</p>
 		</div>

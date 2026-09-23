@@ -10,11 +10,11 @@
 	<meta property="og:type" content="profile" />
 </svelte:head>
 
-<section class="max-w-4xl mx-auto space-y-16">
+<section class="max-w-4xl mx-auto space-y-10 sm:space-y-16">
 	<!-- Page Header with Curtain Reveal -->
-	<header class="space-y-4 max-w-3xl">
+	<header class="space-y-3 sm:space-y-4 max-w-3xl">
 		<p class="text-xs uppercase tracking-widest text-accent dark:text-accent-dark font-medium">Biografi &amp; Filosofi</p>
-		<h1 use:curtainReveal class="font-serif text-4xl sm:text-6xl font-normal text-ink dark:text-dark-text tracking-tight leading-[1.08]">
+		<h1 use:curtainReveal class="font-serif text-3xl sm:text-5xl lg:text-6xl font-normal text-ink dark:text-dark-text tracking-tight leading-[1.12] sm:leading-[1.08]">
 			Desain yang tenang, kode yang terstruktur rapi.
 		</h1>
 	</header>
@@ -23,10 +23,10 @@
 	<div class="w-full h-px bg-light-border dark:bg-dark-border"></div>
 
 	<!-- Narrative Bio Section -->
-	<div class="grid grid-cols-1 md:grid-cols-12 gap-8 sm:gap-12">
-		<div use:reveal={{ delay: 40, y: 20 }} class="md:col-span-4 space-y-4">
-			<div class="p-6 rounded-2xl border border-light-border dark:border-dark-border bg-light-surface/40 dark:bg-dark-surface/40 space-y-4">
-				<div class="w-16 h-16 rounded-full bg-accent/10 dark:bg-accent-dark/10 border border-accent/20 dark:border-accent-dark/20 flex items-center justify-center font-serif text-2xl text-accent dark:text-accent-dark">
+	<div class="grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-12">
+		<div use:reveal={{ delay: 40, y: 16 }} class="md:col-span-4 space-y-4">
+			<div class="p-5 sm:p-6 rounded-2xl border border-light-border dark:border-dark-border bg-light-surface/40 dark:bg-dark-surface/40 space-y-4">
+				<div class="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-accent/10 dark:bg-accent-dark/10 border border-accent/20 dark:border-accent-dark/20 flex items-center justify-center font-serif text-xl sm:text-2xl text-accent dark:text-accent-dark">
 					SF
 				</div>
 				<div>
@@ -42,15 +42,15 @@
 				</div>
 			</div>
 
-			<!-- Quick Social Links Column -->
-			<div class="p-5 rounded-2xl border border-light-border dark:border-dark-border bg-light-surface/20 dark:bg-dark-surface/20 space-y-2">
-				<p class="text-xs uppercase tracking-wider text-light-muted dark:text-dark-muted font-medium mb-3">Tautan Terhubung</p>
-				<div class="space-y-1.5 text-sm">
+			<!-- Quick Social Links Column with Touch-friendly Targets -->
+			<div class="p-5 rounded-2xl border border-light-border dark:border-dark-border bg-light-surface/20 dark:bg-dark-surface/20 space-y-1">
+				<p class="text-xs uppercase tracking-wider text-light-muted dark:text-dark-muted font-medium mb-2">Tautan Terhubung</p>
+				<div class="space-y-0.5 text-sm">
 					<a
 						href="https://github.com"
 						target="_blank"
 						rel="noopener noreferrer"
-						class="flex items-center justify-between text-ink dark:text-dark-text hover:text-accent dark:hover:text-accent-dark py-1 group"
+						class="flex items-center justify-between text-ink dark:text-dark-text hover:text-accent dark:hover:text-accent-dark py-2.5 px-1 group min-h-[44px]"
 					>
 						<span>GitHub</span>
 						<span class="text-xs text-light-muted dark:text-dark-muted group-hover:translate-x-0.5 transition-transform">↗</span>
@@ -59,7 +59,7 @@
 						href="https://linkedin.com"
 						target="_blank"
 						rel="noopener noreferrer"
-						class="flex items-center justify-between text-ink dark:text-dark-text hover:text-accent dark:hover:text-accent-dark py-1 group"
+						class="flex items-center justify-between text-ink dark:text-dark-text hover:text-accent dark:hover:text-accent-dark py-2.5 px-1 group min-h-[44px]"
 					>
 						<span>LinkedIn</span>
 						<span class="text-xs text-light-muted dark:text-dark-muted group-hover:translate-x-0.5 transition-transform">↗</span>
@@ -68,14 +68,14 @@
 						href="https://x.com"
 						target="_blank"
 						rel="noopener noreferrer"
-						class="flex items-center justify-between text-ink dark:text-dark-text hover:text-accent dark:hover:text-accent-dark py-1 group"
+						class="flex items-center justify-between text-ink dark:text-dark-text hover:text-accent dark:hover:text-accent-dark py-2.5 px-1 group min-h-[44px]"
 					>
 						<span>Twitter / X</span>
 						<span class="text-xs text-light-muted dark:text-dark-muted group-hover:translate-x-0.5 transition-transform">↗</span>
 					</a>
 					<a
 						href="mailto:contact@domain.com"
-						class="flex items-center justify-between text-ink dark:text-dark-text hover:text-accent dark:hover:text-accent-dark py-1 group"
+						class="flex items-center justify-between text-ink dark:text-dark-text hover:text-accent dark:hover:text-accent-dark py-2.5 px-1 group min-h-[44px]"
 					>
 						<span>Surat Elektronik</span>
 						<span class="text-xs text-light-muted dark:text-dark-muted group-hover:translate-x-0.5 transition-transform">↗</span>
@@ -85,7 +85,7 @@
 		</div>
 
 		<!-- Story & Philosophy Content with Scroll Reveal -->
-		<div use:reveal={{ delay: 80, y: 20 }} class="md:col-span-8 space-y-6 text-ink/85 dark:text-dark-text/85 text-base sm:text-lg font-light leading-relaxed">
+		<div use:reveal={{ delay: 80, y: 16 }} class="md:col-span-8 space-y-5 sm:space-y-6 text-ink/85 dark:text-dark-text/85 text-base sm:text-lg font-light leading-relaxed">
 			<p>
 				Saya beroperasi di persimpangan antara seni tata rupa antarmuka dan rekayasa perangkat lunak modern. Selama bertahun-tahun merancang produk digital, saya menemukan bahwa situs web yang bertahan lama adalah situs yang tidak terjebak pada tren visual yang bising, melainkan berakar pada hierarki informasi yang jernih dan performa yang cepat.
 			</p>
@@ -102,16 +102,16 @@
 	<div class="w-full h-px bg-light-border dark:bg-dark-border"></div>
 
 	<!-- Skills & Capabilities Matrix (Staggered Scroll Reveal) -->
-	<div class="space-y-6">
-		<div use:reveal={{ delay: 0, y: 16 }} class="space-y-1">
+	<div class="space-y-5 sm:space-y-6">
+		<div use:reveal={{ delay: 0, y: 14 }} class="space-y-1">
 			<p class="text-xs uppercase tracking-widest text-accent dark:text-accent-dark font-medium">Kompetensi</p>
-			<h2 class="font-serif text-3xl font-normal text-ink dark:text-dark-text">Keahlian &amp; Disiplin</h2>
+			<h2 class="font-serif text-2xl sm:text-3xl font-normal text-ink dark:text-dark-text">Keahlian &amp; Disiplin</h2>
 		</div>
 
-		<div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+		<div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
 			<!-- Column 1 -->
-			<div use:reveal={{ delay: 0, y: 20 }} class="p-6 rounded-2xl border border-light-border dark:border-dark-border bg-light-surface/30 dark:bg-dark-surface/30 space-y-3">
-				<h3 class="font-serif text-xl font-normal text-ink dark:text-dark-text">Design Systems</h3>
+			<div use:reveal={{ delay: 0, y: 16 }} class="p-5 sm:p-6 rounded-2xl border border-light-border dark:border-dark-border bg-light-surface/30 dark:bg-dark-surface/30 space-y-3">
+				<h3 class="font-serif text-lg sm:text-xl font-normal text-ink dark:text-dark-text">Design Systems</h3>
 				<ul class="space-y-2 text-sm text-light-muted dark:text-dark-muted font-light">
 					<li>— Modular Design Tokens</li>
 					<li>— Typographic Hierarchy</li>
@@ -121,8 +121,8 @@
 			</div>
 
 			<!-- Column 2 -->
-			<div use:reveal={{ delay: 80, y: 20 }} class="p-6 rounded-2xl border border-light-border dark:border-dark-border bg-light-surface/30 dark:bg-dark-surface/30 space-y-3">
-				<h3 class="font-serif text-xl font-normal text-ink dark:text-dark-text">Frontend Engineering</h3>
+			<div use:reveal={{ delay: 60, y: 16 }} class="p-5 sm:p-6 rounded-2xl border border-light-border dark:border-dark-border bg-light-surface/30 dark:bg-dark-surface/30 space-y-3">
+				<h3 class="font-serif text-lg sm:text-xl font-normal text-ink dark:text-dark-text">Frontend Engineering</h3>
 				<ul class="space-y-2 text-sm text-light-muted dark:text-dark-muted font-light">
 					<li>— SvelteKit &amp; Svelte 5 Runes</li>
 					<li>— Static Site Generation (SSG)</li>
@@ -132,8 +132,8 @@
 			</div>
 
 			<!-- Column 3 -->
-			<div use:reveal={{ delay: 160, y: 20 }} class="p-6 rounded-2xl border border-light-border dark:border-dark-border bg-light-surface/30 dark:bg-dark-surface/30 space-y-3">
-				<h3 class="font-serif text-xl font-normal text-ink dark:text-dark-text">Performance &amp; Craft</h3>
+			<div use:reveal={{ delay: 120, y: 16 }} class="p-5 sm:p-6 rounded-2xl border border-light-border dark:border-dark-border bg-light-surface/30 dark:bg-dark-surface/30 space-y-3">
+				<h3 class="font-serif text-lg sm:text-xl font-normal text-ink dark:text-dark-text">Performance &amp; Craft</h3>
 				<ul class="space-y-2 text-sm text-light-muted dark:text-dark-muted font-light">
 					<li>— Core Web Vitals Optimization</li>
 					<li>— Responsive &amp; Mobile-First Layouts</li>
@@ -148,10 +148,10 @@
 	<div class="w-full h-px bg-light-border dark:bg-dark-border"></div>
 
 	<!-- Experience Timeline (Hairline Rows with Staggered Scroll Reveal) -->
-	<div class="space-y-6">
-		<div use:reveal={{ delay: 0, y: 16 }} class="space-y-1">
+	<div class="space-y-5 sm:space-y-6">
+		<div use:reveal={{ delay: 0, y: 14 }} class="space-y-1">
 			<p class="text-xs uppercase tracking-widest text-accent dark:text-accent-dark font-medium">Perjalanan Karier</p>
-			<h2 class="font-serif text-3xl font-normal text-ink dark:text-dark-text">Riwayat Pengalaman</h2>
+			<h2 class="font-serif text-2xl sm:text-3xl font-normal text-ink dark:text-dark-text">Riwayat Pengalaman</h2>
 		</div>
 
 		<div class="divide-y divide-light-border dark:divide-dark-border border-y border-light-border dark:border-dark-border">
@@ -175,7 +175,7 @@
 					desc: 'Merancang identitas visual, komponen UI terstandarisasi, dan website editorial publikasi konten panjang.'
 				}
 			] as exp, index}
-				<div use:reveal={{ delay: index * 90, y: 16 }} class="py-6 grid grid-cols-1 sm:grid-cols-12 gap-4 items-baseline">
+				<div use:reveal={{ delay: index * 80, y: 14 }} class="py-5 sm:py-6 grid grid-cols-1 sm:grid-cols-12 gap-2 sm:gap-4 items-baseline">
 					<div class="sm:col-span-3 text-xs uppercase tracking-widest font-mono text-light-muted dark:text-dark-muted">
 						{exp.period}
 					</div>

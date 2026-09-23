@@ -1,4 +1,5 @@
 import { initGSAP } from './gsapHelper.js';
+import { shouldReduceMotion, isTouchOnlyDevice, onPortfolioReady } from './motionHelper.js';
 
 /** @type {import('lenis').default | null} */
 let lenisInstance = null;
@@ -12,14 +13,20 @@ let anchorClickHandler = null;
 /**
  * Initializes Lenis smooth scrolling with GSAP ScrollTrigger synchronization.
  * Uses dynamic import to lazy-load the Lenis library without blocking initial render.
- * If prefers-reduced-motion is active or running in SSR, it safely bypasses Lenis.
+ * If prefers-reduced-motion is active or running on a touch device, it safely bypasses Lenis
+ * to allow native, hardware-accelerated momentum scrolling.
  * @returns {Promise<import('lenis').default | null>}
  */
 export async function initSmoothScroll() {
 	if (typeof window === 'undefined') return null;
 
 	// Respect prefers-reduced-motion: fallback to native instant scroll
-	if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+	if (shouldReduceMotion()) {
+		return null;
+	}
+
+	// Disable Lenis on touch devices to allow native iOS/Android momentum scrolling
+	if (isTouchOnlyDevice()) {
 		return null;
 	}
 
@@ -52,6 +59,16 @@ export async function initSmoothScroll() {
 
 		gsap.ticker.add(tickerCallback);
 		gsap.ticker.lagSmoothing(0);
+
+		// Synchronize initial layout
+		ScrollTrigger.refresh();
+
+		// Refresh triggers again once page entrance / preloader completes
+		onPortfolioReady(() => {
+			setTimeout(() => {
+				ScrollTrigger.refresh();
+			}, 100);
+		});
 	}
 
 	// Internal anchor smooth scrolling (#section)

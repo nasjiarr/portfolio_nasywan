@@ -1,4 +1,5 @@
 import { initGSAP } from './gsapHelper.js';
+import { shouldReduceMotion, isTouchOnlyDevice, onPortfolioReady } from './motionHelper.js';
 
 /**
  * @typedef {Object} ParallaxOptions
@@ -7,7 +8,7 @@ import { initGSAP } from './gsapHelper.js';
 
 /**
  * Svelte Action for subtle scroll-based parallax on mockups and images.
- * Respects prefers-reduced-motion.
+ * Respects prefers-reduced-motion and softens on touch screens.
  *
  * @param {HTMLElement} node
  * @param {ParallaxOptions} [options]
@@ -18,8 +19,7 @@ export function parallax(node, options = {}) {
 		return { destroy: () => {} };
 	}
 
-	const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-	if (prefersReducedMotion) {
+	if (shouldReduceMotion()) {
 		return { destroy: () => {} };
 	}
 
@@ -29,33 +29,42 @@ export function parallax(node, options = {}) {
 	}
 
 	const { gsap } = gsapContext;
-	const speed = options.speed ?? 40;
+	const isTouch = isTouchOnlyDevice();
+	const baseSpeed = options.speed ?? 40;
+	const speed = isTouch ? Math.round(baseSpeed * 0.4) : baseSpeed;
 
 	node.style.willChange = 'transform';
 
-	const tween = gsap.fromTo(
-		node,
-		{
-			y: -speed / 2
-		},
-		{
-			y: speed / 2,
-			ease: 'none',
-			scrollTrigger: {
-				trigger: node.parentElement || node,
-				start: 'top bottom',
-				end: 'bottom top',
-				scrub: 1
+	/** @type {gsap.core.Tween | null} */
+	let tween = null;
+
+	onPortfolioReady(() => {
+		tween = gsap.fromTo(
+			node,
+			{
+				y: -speed / 2
+			},
+			{
+				y: speed / 2,
+				ease: 'none',
+				scrollTrigger: {
+					trigger: node.parentElement || node,
+					start: 'top bottom',
+					end: 'bottom top',
+					scrub: isTouch ? 0.3 : 1
+				}
 			}
-		}
-	);
+		);
+	});
 
 	return {
 		destroy() {
-			if (tween.scrollTrigger) {
-				tween.scrollTrigger.kill();
+			if (tween) {
+				if (tween.scrollTrigger) {
+					tween.scrollTrigger.kill();
+				}
+				tween.kill();
 			}
-			tween.kill();
 			node.style.transform = '';
 			node.style.willChange = 'auto';
 		}

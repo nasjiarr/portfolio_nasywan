@@ -1,5 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
+	import { shouldReduceMotion } from '$lib/animations/motionHelper.js';
 
 	let isDark = $state(false);
 	let mounted = $state(false);
@@ -47,11 +48,9 @@
 			return;
 		}
 
-		const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
 		// Fallback for browsers without View Transitions or when reduced motion is preferred
 		// @ts-ignore
-		if (!document.startViewTransition || prefersReducedMotion) {
+		if (!document.startViewTransition || shouldReduceMotion()) {
 			applyTheme(nextDark);
 			return;
 		}

@@ -13,20 +13,20 @@
 	<meta property="og:type" content="website" />
 </svelte:head>
 
-<section class="max-w-5xl mx-auto space-y-12">
+<section class="max-w-5xl mx-auto space-y-8 sm:space-y-12">
 	<!-- Page Header with Curtain Reveal -->
-	<header class="space-y-4 max-w-3xl">
+	<header class="space-y-3 sm:space-y-4 max-w-3xl">
 		<div class="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-accent dark:text-accent-dark font-medium">
 			<span>Koleksi Karya</span>
 			<span>•</span>
 			<span>{data.projects.length} Proyek Terpublikasi</span>
 		</div>
 
-		<h1 use:curtainReveal class="font-serif text-4xl sm:text-6xl font-normal text-ink dark:text-dark-text tracking-tight leading-[1.08]">
+		<h1 use:curtainReveal class="font-serif text-3xl sm:text-5xl lg:text-6xl font-normal text-ink dark:text-dark-text tracking-tight leading-[1.12] sm:leading-[1.08]">
 			Daftar Proyek &amp; Eksplorasi
 		</h1>
 
-		<p class="font-sans text-base sm:text-lg text-light-muted dark:text-dark-muted font-light leading-relaxed">
+		<p class="font-sans text-sm sm:text-base lg:text-lg text-light-muted dark:text-dark-muted font-light leading-relaxed">
 			Koleksi terpilih mencakup desain sistem, platform data analitik, dan aplikasi web performa tinggi yang dibangun dengan perhatian mendalam terhadap detail tipografi dan arsitektur kode.
 		</p>
 	</header>
@@ -34,17 +34,17 @@
 	<!-- Hairline Divider -->
 	<div class="w-full h-px bg-light-border dark:bg-dark-border"></div>
 
-	<!-- Projects Grid with Stagger Delay, Hover Zoom, and Custom Cursor Hook -->
-	<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+	<!-- Projects Grid with Stagger Delay, Hover Zoom, and Touch Feedback -->
+	<div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
 		{#each data.projects as project, index}
-			<div use:reveal={{ delay: index * 100, y: 24 }}>
+			<div use:reveal={{ delay: index * 90, y: 16 }}>
 				<a
 					href="/projects/{project.slug}/"
 					data-cursor="view"
-					class="group flex flex-col justify-between h-full rounded-2xl border border-light-border dark:border-dark-border bg-light-surface/40 dark:bg-dark-surface/40 hover:border-accent/40 dark:hover:border-accent-dark/40 overflow-hidden transition-all duration-200"
+					class="touch-card group flex flex-col justify-between h-full rounded-2xl border border-light-border dark:border-dark-border bg-light-surface/40 dark:bg-dark-surface/40 hover:border-accent/40 dark:hover:border-accent-dark/40 active:border-accent/50 overflow-hidden transition-all duration-200"
 				>
 					<!-- Visual Mockup Container with Smooth Zoom & Gradient Overlay -->
-					<div class="p-4 sm:p-5 border-b border-light-border dark:border-dark-border bg-light-surface/80 dark:bg-dark-surface/80">
+					<div class="p-3.5 sm:p-5 border-b border-light-border dark:border-dark-border bg-light-surface/80 dark:bg-dark-surface/80">
 						<div class="overflow-hidden rounded-xl bg-paper dark:bg-dark-bg aspect-[16/10] relative">
 							<ResponsiveImage
 								src={project.image}
@@ -61,9 +61,9 @@
 						</div>
 					</div>
 
-					<!-- Content Details -->
-					<div class="p-6 sm:p-7 flex-1 flex flex-col justify-between space-y-6">
-						<div class="space-y-3">
+					<!-- Content Details with Mobile-optimized Spacing -->
+					<div class="p-5 sm:p-7 flex-1 flex flex-col justify-between space-y-5 sm:space-y-6">
+						<div class="space-y-2.5 sm:space-y-3">
 							<div class="flex items-center justify-between text-xs text-light-muted dark:text-dark-muted">
 								<span class="font-medium text-accent dark:text-accent-dark">{project.category}</span>
 								<span>{project.year}</span>
@@ -73,12 +73,12 @@
 								{project.title}
 							</h2>
 
-							<p class="font-sans text-sm sm:text-base text-light-muted dark:text-dark-muted font-light leading-relaxed">
+							<p class="font-sans text-xs sm:text-sm text-light-muted dark:text-dark-muted font-light leading-relaxed">
 								{project.description}
 							</p>
 						</div>
 
-						<div class="space-y-4 pt-4 border-t border-light-border/60 dark:border-dark-border/60">
+						<div class="space-y-3 sm:space-y-4 pt-4 border-t border-light-border/60 dark:border-dark-border/60">
 							<!-- Tags -->
 							<div class="flex flex-wrap gap-1.5">
 								{#each project.tags.slice(0, 3) as tag}
@@ -90,7 +90,7 @@
 
 							<!-- Action CTA -->
 							<div class="flex items-center justify-between pt-1">
-								<span class="text-xs font-medium text-accent dark:text-accent-dark group-hover:underline flex items-center gap-1">
+								<span class="text-xs font-medium text-accent dark:text-accent-dark group-hover:underline flex items-center gap-1 py-1">
 									<span>Lihat studi kasus</span>
 									<span class="transition-transform duration-150 group-hover:translate-x-1">→</span>
 								</span>

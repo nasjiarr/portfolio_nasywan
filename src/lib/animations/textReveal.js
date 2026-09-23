@@ -1,4 +1,5 @@
 import { initGSAP } from './gsapHelper.js';
+import { shouldReduceMotion, onPortfolioReady } from './motionHelper.js';
 
 /**
  * @typedef {Object} CurtainRevealOptions
@@ -9,7 +10,7 @@ import { initGSAP } from './gsapHelper.js';
 
 /**
  * Svelte Action to reveal text with a smooth curtain / clip-path effect on scroll.
- * Strictly respects prefers-reduced-motion.
+ * Strictly respects prefers-reduced-motion and coordinates with preloader.
  *
  * @param {HTMLElement} node
  * @param {CurtainRevealOptions} [options]
@@ -20,8 +21,7 @@ export function curtainReveal(node, options = {}) {
 		return { destroy: () => {} };
 	}
 
-	const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-	if (prefersReducedMotion) {
+	if (shouldReduceMotion()) {
 		node.style.clipPath = 'none';
 		node.style.transform = 'none';
 		node.style.opacity = '1';
@@ -34,38 +34,47 @@ export function curtainReveal(node, options = {}) {
 	}
 
 	const { gsap } = gsapContext;
-	const duration = options.duration ?? 0.9;
+	const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
+	const duration = options.duration ?? (isMobile ? 0.65 : 0.85);
 	const delay = options.delay ?? 0;
-	const start = options.start ?? 'top 88%';
+	const start = options.start ?? (isMobile ? 'top 94%' : 'top 88%');
+	const yOffset = isMobile ? 16 : 28;
 
-	const tween = gsap.fromTo(
-		node,
-		{
-			clipPath: 'inset(100% 0% 0% 0%)',
-			y: 32,
-			opacity: 0
-		},
-		{
-			clipPath: 'inset(0% 0% 0% 0%)',
-			y: 0,
-			opacity: 1,
-			duration,
-			delay,
-			ease: 'power3.out',
-			scrollTrigger: {
-				trigger: node,
-				start,
-				once: true
+	/** @type {gsap.core.Tween | null} */
+	let tween = null;
+
+	onPortfolioReady(() => {
+		tween = gsap.fromTo(
+			node,
+			{
+				clipPath: 'inset(100% 0% 0% 0%)',
+				y: yOffset,
+				opacity: 0
+			},
+			{
+				clipPath: 'inset(0% 0% 0% 0%)',
+				y: 0,
+				opacity: 1,
+				duration,
+				delay,
+				ease: 'power3.out',
+				scrollTrigger: {
+					trigger: node,
+					start,
+					once: true
+				}
 			}
-		}
-	);
+		);
+	});
 
 	return {
 		destroy() {
-			if (tween.scrollTrigger) {
-				tween.scrollTrigger.kill();
+			if (tween) {
+				if (tween.scrollTrigger) {
+					tween.scrollTrigger.kill();
+				}
+				tween.kill();
 			}
-			tween.kill();
 		}
 	};
 }

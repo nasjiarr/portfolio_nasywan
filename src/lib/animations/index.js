@@ -6,3 +6,4 @@ export { parallax } from './parallax.js';
 export { initGSAP } from './gsapHelper.js';
 export { default as CustomCursor } from './CustomCursor.svelte';
 export { initSmoothScroll, getLenis, pauseScroll, resumeScroll, destroySmoothScroll } from './smoothScroll.js';
+export { shouldReduceMotion, isTouchOnlyDevice, markPortfolioReady, onPortfolioReady } from './motionHelper.js';

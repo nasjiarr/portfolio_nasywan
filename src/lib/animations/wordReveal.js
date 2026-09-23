@@ -1,4 +1,5 @@
 import { initGSAP } from './gsapHelper.js';
+import { shouldReduceMotion, onPortfolioReady } from './motionHelper.js';
 
 /**
  * @typedef {Object} WordRevealOptions
@@ -9,7 +10,7 @@ import { initGSAP } from './gsapHelper.js';
 
 /**
  * Svelte Action to split text into words and animate them with a blur-to-focus staggered reveal.
- * Respects prefers-reduced-motion.
+ * Respects prefers-reduced-motion and waits for preloader completion.
  *
  * @param {HTMLElement} node
  * @param {WordRevealOptions} [options]
@@ -20,8 +21,7 @@ export function wordReveal(node, options = {}) {
 		return { destroy: () => {} };
 	}
 
-	const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-	if (prefersReducedMotion) {
+	if (shouldReduceMotion()) {
 		return { destroy: () => {} };
 	}
 
@@ -45,37 +45,45 @@ export function wordReveal(node, options = {}) {
 		span.innerText = word + (i < words.length - 1 ? '\u00A0' : '');
 		span.style.display = 'inline-block';
 		span.style.willChange = 'opacity, transform, filter';
+		span.style.opacity = '0';
+		span.style.transform = 'translateY(22px)';
+		span.style.filter = 'blur(10px)';
 		node.appendChild(span);
 		return span;
 	});
 
-	const tween = gsap.fromTo(
-		spans,
-		{
-			opacity: 0,
-			y: 22,
-			filter: 'blur(10px)'
-		},
-		{
-			opacity: 1,
-			y: 0,
-			filter: 'blur(0px)',
-			duration,
-			delay,
-			stagger,
-			ease: 'power2.out',
-			onComplete() {
-				spans.forEach((s) => {
-					s.style.filter = '';
-					s.style.willChange = 'auto';
-				});
+	/** @type {gsap.core.Tween | null} */
+	let tween = null;
+
+	onPortfolioReady(() => {
+		tween = gsap.fromTo(
+			spans,
+			{
+				opacity: 0,
+				y: 22,
+				filter: 'blur(10px)'
+			},
+			{
+				opacity: 1,
+				y: 0,
+				filter: 'blur(0px)',
+				duration,
+				delay,
+				stagger,
+				ease: 'power2.out',
+				onComplete() {
+					spans.forEach((s) => {
+						s.style.filter = '';
+						s.style.willChange = 'auto';
+					});
+				}
 			}
-		}
-	);
+		);
+	});
 
 	return {
 		destroy() {
-			tween.kill();
+			if (tween) tween.kill();
 			node.innerText = rawText;
 		}
 	};

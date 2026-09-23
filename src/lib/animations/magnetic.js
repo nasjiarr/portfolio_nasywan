@@ -1,4 +1,5 @@
 import { gsap } from 'gsap';
+import { shouldReduceMotion, isTouchOnlyDevice } from './motionHelper.js';
 
 /**
  * @typedef {Object} MagneticOptions
@@ -18,10 +19,7 @@ export function magnetic(node, options = {}) {
 		return { destroy: () => {}, update: () => {} };
 	}
 
-	const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-	const isTouch = window.matchMedia('(pointer: coarse)').matches || 'ontouchstart' in window;
-
-	if (prefersReducedMotion || isTouch) {
+	if (shouldReduceMotion() || isTouchOnlyDevice()) {
 		return { destroy: () => {}, update: () => {} };
 	}
 

@@ -1,18 +1,19 @@
 <script>
 	import { onMount } from 'svelte';
 	import { pauseScroll, resumeScroll } from '$lib/animations';
+	import { shouldReduceMotion, markPortfolioReady } from '$lib/animations/motionHelper.js';
 
 	let showPreloader = $state(false);
 	let isClosing = $state(false);
 	let progress = $state(0);
 
 	onMount(() => {
-		// If user has visited in this session, skip preloader
+		// If user has visited in this session or reduced motion is preferred, skip preloader
 		const hasVisited = sessionStorage.getItem('portfolio_visited');
-		const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-		if (hasVisited || isReducedMotion) {
+		if (hasVisited || shouldReduceMotion()) {
 			showPreloader = false;
+			markPortfolioReady();
 			return;
 		}
 
@@ -36,6 +37,9 @@
 				// Start exit curtain transition
 				setTimeout(() => {
 					isClosing = true;
+					// Trigger page entrance animations right as curtain begins sliding open
+					markPortfolioReady();
+
 					setTimeout(() => {
 						showPreloader = false;
 						sessionStorage.setItem('portfolio_visited', 'true');
