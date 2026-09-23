@@ -1,0 +1,57 @@
+@import "tailwindcss";
+@config "../../tailwind.config.js";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-serif: "Instrument Serif", "Fraunces", Georgia, serif;
+  --font-sans: "Geist", "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  --color-paper: #FAFAF7;
+  --color-ink: #0D0D0D;
+
+  --color-dark-bg: #0A0A0A;
+  --color-dark-surface: #141414;
+  --color-dark-border: #242424;
+  --color-dark-text: #F5F5F0;
+  --color-dark-muted: #94948C;
+
+  --color-light-bg: #FAFAF7;
+  --color-light-surface: #FFFFFF;
+  --color-light-border: #E7E7E0;
+  --color-light-text: #0D0D0D;
+  --color-light-muted: #6E6E66;
+
+  --color-accent: #1B4D3E;
+  --color-accent-hover: #143B30;
+  --color-accent-light: #E7F2EE;
+  --color-accent-dark: #34D399;
+  --color-accent-muted: #2A6653;
+
+  --color-gold: #B48C36;
+  --color-gold-hover: #96742A;
+  --color-gold-light: #F8F4EA;
+  --color-gold-dark: #D4AA50;
+}
+
+:root {
+  color-scheme: light dark;
+}
+
+html {
+  background-color: #FAFAF7;
+  color: #0D0D0D;
+}
+
+html.dark {
+  background-color: #0A0A0A;
+  color: #F5F5F0;
+}
+
+body {
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
