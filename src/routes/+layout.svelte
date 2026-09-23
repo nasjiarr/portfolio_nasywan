@@ -1,19 +1,37 @@
 <script>
 	import './layout.css';
+	import { onMount, onDestroy } from 'svelte';
 	import Navbar from '$lib/components/Navbar.svelte';
+	import Preloader from '$lib/components/Preloader.svelte';
 	import { onNavigate } from '$app/navigation';
-	import { CustomCursor, initGSAP } from '$lib/animations';
+	import { CustomCursor, initGSAP, initSmoothScroll, getLenis, destroySmoothScroll } from '$lib/animations';
 
 	let { children } = $props();
 
+	onMount(() => {
+		initSmoothScroll();
+	});
+
+	onDestroy(() => {
+		destroySmoothScroll();
+	});
+
 	onNavigate((navigation) => {
+		// Reset scroll position via Lenis or native
+		const lenis = getLenis();
+		if (lenis) {
+			lenis.scrollTo(0, { immediate: true });
+		} else if (typeof window !== 'undefined') {
+			window.scrollTo(0, 0);
+		}
+
 		// Refresh GSAP ScrollTrigger calculations on navigation
 		if (typeof window !== 'undefined') {
 			const gsapContext = initGSAP();
 			if (gsapContext) {
 				setTimeout(() => {
 					gsapContext.ScrollTrigger.refresh();
-				}, 150);
+				}, 120);
 			}
 		}
 
@@ -41,7 +59,10 @@
 	<meta name="description" content="Personal portfolio and creative works" />
 </svelte:head>
 
-<!-- Custom Interactive Magnetic / Trailing Cursor (Disabled on mobile/touch) -->
+<!-- First Load Monogram Preloader -->
+<Preloader />
+
+<!-- Custom Interactive Magnetic / Trailing Cursor (Disabled on mobile/touch & reduced motion) -->
 <CustomCursor />
 
 <div class="min-h-screen flex flex-col bg-paper text-ink dark:bg-dark-bg dark:text-dark-text selection:bg-accent-light dark:selection:bg-accent/30 selection:text-accent dark:selection:text-accent-dark transition-colors duration-200">

@@ -41,12 +41,32 @@
 html {
   background-color: #FAFAF7;
   color: #0D0D0D;
-  scroll-behavior: smooth;
 }
 
 html.dark {
   background-color: #0A0A0A;
   color: #F5F5F0;
+}
+
+/* Lenis Smooth Scroll Specifications */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
 }
 
 body {
