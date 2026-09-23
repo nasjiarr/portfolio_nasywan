@@ -1,4 +1,6 @@
 <script>
+	import { reveal, magnetic, curtainReveal, wordReveal } from '$lib/animations';
+
 	let { data } = $props();
 </script>
 
@@ -12,17 +14,20 @@
 </svelte:head>
 
 <div class="space-y-20 sm:space-y-28">
-	<!-- Hero Section -->
-	<section class="max-w-4xl space-y-8 pt-4 sm:pt-8">
+	<!-- Hero Section with Scroll Reveal -->
+	<section use:reveal={{ delay: 0, y: 16 }} class="max-w-4xl space-y-8 pt-4 sm:pt-8">
 		<!-- Status Indicator -->
 		<div class="inline-flex items-center gap-2.5 px-3.5 py-1 rounded-full border border-light-border dark:border-dark-border text-xs font-medium text-accent dark:text-accent-dark bg-accent-light/40 dark:bg-accent/15">
 			<span class="w-1.5 h-1.5 rounded-full bg-accent dark:bg-accent-dark animate-pulse"></span>
 			<span>Tersedia untuk proyek terpilih &amp; kolaborasi</span>
 		</div>
 
-		<!-- Main Hero Headline -->
+		<!-- Main Hero Headline with Per-word Blur-to-Focus Reveal -->
 		<div class="space-y-6">
-			<h1 class="font-serif text-4xl sm:text-6xl lg:text-7xl font-normal tracking-tight text-ink dark:text-dark-text leading-[1.06]">
+			<h1
+				use:wordReveal={{ delay: 0.1, duration: 0.8 }}
+				class="font-serif text-4xl sm:text-6xl lg:text-7xl font-normal tracking-tight text-ink dark:text-dark-text leading-[1.06]"
+			>
 				Membangun ruang digital dengan presisi desain &amp; arsitektur kode modern.
 			</h1>
 
@@ -31,22 +36,25 @@
 			</p>
 		</div>
 
-		<!-- Action Links -->
+		<!-- Action Links with Magnetic Button Effect -->
 		<div class="flex flex-wrap items-center gap-4 pt-2">
 			<a
+				use:magnetic={{ strength: 0.3 }}
 				href="/projects/"
-				class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-accent text-white hover:bg-accent-hover font-medium text-sm transition-all duration-150 shadow-sm"
+				class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-accent text-white hover:bg-accent-hover font-medium text-sm transition-colors duration-150 shadow-sm"
 			>
 				<span>Eksplorasi Proyek</span>
 				<span>→</span>
 			</a>
 			<a
+				use:magnetic={{ strength: 0.22 }}
 				href="/about/"
 				class="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-light-border dark:border-dark-border bg-light-surface/60 dark:bg-dark-surface/60 text-ink dark:text-dark-text hover:border-accent dark:hover:border-accent-dark font-medium text-sm transition-colors duration-150"
 			>
 				<span>Tentang Saya</span>
 			</a>
 			<a
+				use:magnetic={{ strength: 0.22 }}
 				href="/contact/"
 				class="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-light-border dark:border-dark-border bg-light-surface/60 dark:bg-dark-surface/60 text-light-muted dark:text-dark-muted hover:text-ink dark:hover:text-dark-text hover:border-accent dark:hover:border-accent-dark font-medium text-sm transition-colors duration-150"
 			>
@@ -58,12 +66,16 @@
 	<!-- Hairline Divider -->
 	<div class="w-full h-px bg-light-border dark:bg-dark-border"></div>
 
-	<!-- Featured Projects Section -->
+	<!-- Featured Projects Section with Staggered Scroll Reveal -->
 	<section class="space-y-10">
-		<div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+		<div use:reveal={{ delay: 40, y: 16 }} class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
 			<div class="space-y-2">
 				<p class="text-xs uppercase tracking-widest text-accent dark:text-accent-dark font-medium">Karya Terpilih</p>
-				<h2 class="font-serif text-3xl sm:text-4xl font-normal text-ink dark:text-dark-text tracking-tight">
+				<!-- Section Heading with Curtain Clip-Path Reveal -->
+				<h2
+					use:curtainReveal
+					class="font-serif text-3xl sm:text-4xl font-normal text-ink dark:text-dark-text tracking-tight"
+				>
 					Proyek Unggulan
 				</h2>
 			</div>
@@ -77,51 +89,56 @@
 			</a>
 		</div>
 
-		<!-- Featured Grid (Hairline Cards) -->
+		<!-- Featured Grid with Stagger Delay, Hover Zoom & Custom Cursor Tag -->
 		<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 			{#each data.featuredProjects as project, index}
-				<a
-					href="/projects/{project.slug}/"
-					class="group flex flex-col justify-between rounded-2xl border border-light-border dark:border-dark-border bg-light-surface/40 dark:bg-dark-surface/40 hover:border-accent/40 dark:hover:border-accent-dark/40 overflow-hidden transition-all duration-200"
-				>
-					<!-- Mockup Header -->
-					<div class="p-4 border-b border-light-border dark:border-dark-border bg-light-surface/70 dark:bg-dark-surface/70">
-						<div class="overflow-hidden rounded-xl bg-paper dark:bg-dark-bg aspect-[16/11]">
-							<img
-								src={project.image}
-								alt={project.title}
-								class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
-								loading="lazy"
-							/>
+				<div use:reveal={{ delay: index * 120, y: 24 }}>
+					<a
+						href="/projects/{project.slug}/"
+						data-cursor="view"
+						class="group flex flex-col justify-between h-full rounded-2xl border border-light-border dark:border-dark-border bg-light-surface/40 dark:bg-dark-surface/40 hover:border-accent/40 dark:hover:border-accent-dark/40 overflow-hidden transition-all duration-200"
+					>
+						<!-- Mockup Header with Smooth Zoom & Gradient Overlay -->
+						<div class="p-4 border-b border-light-border dark:border-dark-border bg-light-surface/70 dark:bg-dark-surface/70">
+							<div class="overflow-hidden rounded-xl bg-paper dark:bg-dark-bg aspect-[16/11] relative">
+								<img
+									src={project.image}
+									alt={project.title}
+									class="card-zoom-img w-full h-full object-cover"
+									loading="lazy"
+								/>
+								<!-- Subtle dark gradient overlay appearing smoothly on hover -->
+								<div class="absolute inset-0 bg-gradient-to-t from-black/30 via-black/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+							</div>
 						</div>
-					</div>
 
-					<!-- Details -->
-					<div class="p-6 flex-1 flex flex-col justify-between space-y-4">
-						<div class="space-y-2">
-							<div class="flex items-center justify-between text-xs text-light-muted dark:text-dark-muted">
-								<span class="font-medium text-accent dark:text-accent-dark">{project.category}</span>
-								<span>{project.year}</span>
+						<!-- Details -->
+						<div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+							<div class="space-y-2">
+								<div class="flex items-center justify-between text-xs text-light-muted dark:text-dark-muted">
+									<span class="font-medium text-accent dark:text-accent-dark">{project.category}</span>
+									<span>{project.year}</span>
+								</div>
+
+								<h3 class="font-serif text-xl sm:text-2xl font-normal text-ink dark:text-dark-text group-hover:text-accent dark:group-hover:text-accent-dark transition-colors duration-150">
+									{project.title}
+								</h3>
+
+								<p class="font-sans text-xs sm:text-sm text-light-muted dark:text-dark-muted font-light leading-relaxed line-clamp-3">
+									{project.description}
+								</p>
 							</div>
 
-							<h3 class="font-serif text-xl sm:text-2xl font-normal text-ink dark:text-dark-text group-hover:text-accent dark:group-hover:text-accent-dark transition-colors duration-150">
-								{project.title}
-							</h3>
-
-							<p class="font-sans text-xs sm:text-sm text-light-muted dark:text-dark-muted font-light leading-relaxed line-clamp-3">
-								{project.description}
-							</p>
+							<div class="pt-4 border-t border-light-border/60 dark:border-dark-border/60 flex items-center justify-between">
+								<span class="text-xs font-medium text-accent dark:text-accent-dark group-hover:underline flex items-center gap-1">
+									<span>Buka detail</span>
+									<span class="transition-transform duration-150 group-hover:translate-x-1">→</span>
+								</span>
+								<span class="text-xs text-light-muted dark:text-dark-muted font-mono">0{index + 1}</span>
+							</div>
 						</div>
-
-						<div class="pt-4 border-t border-light-border/60 dark:border-dark-border/60 flex items-center justify-between">
-							<span class="text-xs font-medium text-accent dark:text-accent-dark group-hover:underline flex items-center gap-1">
-								<span>Buka detail</span>
-								<span class="transition-transform duration-150 group-hover:translate-x-1">→</span>
-							</span>
-							<span class="text-xs text-light-muted dark:text-dark-muted font-mono">0{index + 1}</span>
-						</div>
-					</div>
-				</a>
+					</a>
+				</div>
 			{/each}
 		</div>
 	</section>
@@ -129,11 +146,11 @@
 	<!-- Hairline Divider -->
 	<div class="w-full h-px bg-light-border dark:bg-dark-border"></div>
 
-	<!-- Quick Links & Philosophy Section -->
-	<section class="grid grid-cols-1 md:grid-cols-2 gap-8 p-8 sm:p-12 rounded-3xl border border-light-border dark:border-dark-border bg-light-surface/30 dark:bg-dark-surface/30">
+	<!-- Quick Links & Philosophy Section with Curtain Reveal & Magnetic Button -->
+	<section use:reveal={{ delay: 80, y: 20 }} class="grid grid-cols-1 md:grid-cols-2 gap-8 p-8 sm:p-12 rounded-3xl border border-light-border dark:border-dark-border bg-light-surface/30 dark:bg-dark-surface/30">
 		<div class="space-y-4">
 			<p class="text-xs uppercase tracking-widest text-accent dark:text-accent-dark font-medium">Filosofi</p>
-			<h2 class="font-serif text-2xl sm:text-3xl font-normal text-ink dark:text-dark-text">
+			<h2 use:curtainReveal class="font-serif text-2xl sm:text-3xl font-normal text-ink dark:text-dark-text">
 				Kejelasan di atas kerumitan visual.
 			</h2>
 			<p class="font-sans text-sm sm:text-base text-light-muted dark:text-dark-muted font-light leading-relaxed">
@@ -163,8 +180,9 @@
 
 			<div class="pt-4">
 				<a
+					use:magnetic={{ strength: 0.3 }}
 					href="/contact/"
-					class="inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-accent text-white hover:bg-accent-hover font-medium text-sm transition-colors"
+					class="inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-accent text-white hover:bg-accent-hover font-medium text-sm transition-colors shadow-sm"
 				>
 					Kirim Pesan Langsung ↗
 				</a>

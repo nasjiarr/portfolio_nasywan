@@ -1,4 +1,6 @@
 <script>
+	import { reveal, curtainReveal, magnetic } from '$lib/animations';
+
 	let copied = $state(false);
 	let name = $state('');
 	let email = $state('');
@@ -33,14 +35,14 @@
 </svelte:head>
 
 <section class="max-w-4xl mx-auto space-y-16">
-	<!-- Page Header -->
+	<!-- Page Header with Curtain Reveal -->
 	<header class="space-y-4 max-w-3xl">
 		<div class="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-accent dark:text-accent-dark font-medium">
 			<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
 			<span>Terbuka untuk Diskusi Proyek</span>
 		</div>
 
-		<h1 class="font-serif text-4xl sm:text-6xl font-normal text-ink dark:text-dark-text tracking-tight leading-[1.08]">
+		<h1 use:curtainReveal class="font-serif text-4xl sm:text-6xl font-normal text-ink dark:text-dark-text tracking-tight leading-[1.08]">
 			Mari Berbicara &amp; Membangun Sesuatu yang Berarti.
 		</h1>
 
@@ -52,10 +54,10 @@
 	<!-- Hairline Divider -->
 	<div class="w-full h-px bg-light-border dark:bg-dark-border"></div>
 
-	<!-- Content Layout: Direct Contact Info + Clean Form -->
+	<!-- Content Layout: Direct Contact Info + Clean Form with Scroll Reveal -->
 	<div class="grid grid-cols-1 md:grid-cols-12 gap-8 sm:gap-12">
 		<!-- Left Column: Direct Email & Channels -->
-		<div class="md:col-span-5 space-y-6">
+		<div use:reveal={{ delay: 60, y: 20 }} class="md:col-span-5 space-y-6">
 			<!-- Direct Email Card -->
 			<div class="p-6 rounded-2xl border border-light-border dark:border-dark-border bg-light-surface/40 dark:bg-dark-surface/40 space-y-4">
 				<div class="space-y-1">
@@ -65,12 +67,14 @@
 
 				<div class="flex items-center gap-3 pt-2">
 					<a
+						use:magnetic={{ strength: 0.25 }}
 						href="mailto:contact@domain.com"
 						class="px-4 py-2 rounded-lg bg-accent text-white hover:bg-accent-hover text-xs font-medium transition-colors"
 					>
 						Kirim Email ↗
 					</a>
 					<button
+						use:magnetic={{ strength: 0.25 }}
 						type="button"
 						onclick={copyEmail}
 						class="px-4 py-2 rounded-lg border border-light-border dark:border-dark-border bg-paper dark:bg-dark-bg text-ink dark:text-dark-text hover:border-accent dark:hover:border-accent-dark text-xs font-medium transition-colors"
@@ -134,8 +138,8 @@
 			</div>
 		</div>
 
-		<!-- Right Column: Simple Minimalist Contact Form -->
-		<div class="md:col-span-7">
+		<!-- Right Column: Simple Minimalist Contact Form with Scroll Reveal -->
+		<div use:reveal={{ delay: 100, y: 20 }} class="md:col-span-7">
 			<form
 				onsubmit={handleFormSubmit}
 				class="p-6 sm:p-8 rounded-3xl border border-light-border dark:border-dark-border bg-light-surface/40 dark:bg-dark-surface/40 space-y-6"
@@ -212,6 +216,7 @@
 
 				<!-- Submit Button -->
 				<button
+					use:magnetic={{ strength: 0.2 }}
 					type="submit"
 					class="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-accent text-white hover:bg-accent-hover font-medium text-sm transition-colors shadow-sm"
 				>

@@ -33,14 +33,14 @@
 		</a>
 
 		<!-- Navigation Links & Theme Toggle -->
-		<div class="flex items-center gap-6 sm:gap-8">
+		<div class="flex items-center gap-4 sm:gap-8">
 			<nav class="flex items-center gap-1 sm:gap-2" aria-label="Main Navigation">
 				{#each navItems as item}
 					<a
 						href={item.href}
-						class="px-3 py-1.5 rounded-md text-sm font-medium transition-colors duration-150 {isActive(item.href)
-							? 'text-accent dark:text-accent-dark font-semibold bg-accent-light/60 dark:bg-accent/20'
-							: 'text-light-muted dark:text-dark-muted hover:text-ink dark:hover:text-dark-text hover:bg-light-surface dark:hover:bg-dark-surface'}"
+						class="nav-link-animated text-sm font-medium transition-colors duration-150 {isActive(item.href)
+							? 'active text-accent dark:text-accent-dark font-semibold'
+							: 'text-light-muted dark:text-dark-muted hover:text-ink dark:hover:text-dark-text'}"
 						aria-current={isActive(item.href) ? 'page' : undefined}
 					>
 						{item.name}

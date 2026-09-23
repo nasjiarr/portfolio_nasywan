@@ -1,14 +1,48 @@
 <script>
 	import './layout.css';
 	import Navbar from '$lib/components/Navbar.svelte';
+	import { onNavigate } from '$app/navigation';
+	import { CustomCursor, initGSAP } from '$lib/animations';
 
 	let { children } = $props();
+
+	onNavigate((navigation) => {
+		// Refresh GSAP ScrollTrigger calculations on navigation
+		if (typeof window !== 'undefined') {
+			const gsapContext = initGSAP();
+			if (gsapContext) {
+				setTimeout(() => {
+					gsapContext.ScrollTrigger.refresh();
+				}, 150);
+			}
+		}
+
+		// Strictly respect prefers-reduced-motion setting
+		if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+			return;
+		}
+
+		// Check for browser support of View Transitions API
+		if (!document.startViewTransition) {
+			return;
+		}
+
+		return new Promise((resolve) => {
+			document.startViewTransition(async () => {
+				resolve();
+				await navigation.complete;
+			});
+		});
+	});
 </script>
 
 <svelte:head>
 	<title>Studio Folio — Portfolio</title>
 	<meta name="description" content="Personal portfolio and creative works" />
 </svelte:head>
+
+<!-- Custom Interactive Magnetic / Trailing Cursor (Disabled on mobile/touch) -->
+<CustomCursor />
 
 <div class="min-h-screen flex flex-col bg-paper text-ink dark:bg-dark-bg dark:text-dark-text selection:bg-accent-light dark:selection:bg-accent/30 selection:text-accent dark:selection:text-accent-dark transition-colors duration-200">
 	<Navbar />

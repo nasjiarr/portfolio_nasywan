@@ -1,3 +1,7 @@
+<script>
+	import { reveal, curtainReveal } from '$lib/animations';
+</script>
+
 <svelte:head>
 	<title>About — Studio Folio</title>
 	<meta name="description" content="Tentang latar belakang, filosofi desain, keahlian teknis, dan riwayat pengalaman profesional." />
@@ -7,10 +11,10 @@
 </svelte:head>
 
 <section class="max-w-4xl mx-auto space-y-16">
-	<!-- Page Header -->
+	<!-- Page Header with Curtain Reveal -->
 	<header class="space-y-4 max-w-3xl">
 		<p class="text-xs uppercase tracking-widest text-accent dark:text-accent-dark font-medium">Biografi &amp; Filosofi</p>
-		<h1 class="font-serif text-4xl sm:text-6xl font-normal text-ink dark:text-dark-text tracking-tight leading-[1.08]">
+		<h1 use:curtainReveal class="font-serif text-4xl sm:text-6xl font-normal text-ink dark:text-dark-text tracking-tight leading-[1.08]">
 			Desain yang tenang, kode yang terstruktur rapi.
 		</h1>
 	</header>
@@ -20,7 +24,7 @@
 
 	<!-- Narrative Bio Section -->
 	<div class="grid grid-cols-1 md:grid-cols-12 gap-8 sm:gap-12">
-		<div class="md:col-span-4 space-y-4">
+		<div use:reveal={{ delay: 40, y: 20 }} class="md:col-span-4 space-y-4">
 			<div class="p-6 rounded-2xl border border-light-border dark:border-dark-border bg-light-surface/40 dark:bg-dark-surface/40 space-y-4">
 				<div class="w-16 h-16 rounded-full bg-accent/10 dark:bg-accent-dark/10 border border-accent/20 dark:border-accent-dark/20 flex items-center justify-center font-serif text-2xl text-accent dark:text-accent-dark">
 					SF
@@ -80,8 +84,8 @@
 			</div>
 		</div>
 
-		<!-- Story & Philosophy Content -->
-		<div class="md:col-span-8 space-y-6 text-ink/85 dark:text-dark-text/85 text-base sm:text-lg font-light leading-relaxed">
+		<!-- Story & Philosophy Content with Scroll Reveal -->
+		<div use:reveal={{ delay: 80, y: 20 }} class="md:col-span-8 space-y-6 text-ink/85 dark:text-dark-text/85 text-base sm:text-lg font-light leading-relaxed">
 			<p>
 				Saya beroperasi di persimpangan antara seni tata rupa antarmuka dan rekayasa perangkat lunak modern. Selama bertahun-tahun merancang produk digital, saya menemukan bahwa situs web yang bertahan lama adalah situs yang tidak terjebak pada tren visual yang bising, melainkan berakar pada hierarki informasi yang jernih dan performa yang cepat.
 			</p>
@@ -97,16 +101,16 @@
 	<!-- Hairline Divider -->
 	<div class="w-full h-px bg-light-border dark:bg-dark-border"></div>
 
-	<!-- Skills & Capabilities Matrix (Hairline Grid) -->
+	<!-- Skills & Capabilities Matrix (Staggered Scroll Reveal) -->
 	<div class="space-y-6">
-		<div class="space-y-1">
+		<div use:reveal={{ delay: 0, y: 16 }} class="space-y-1">
 			<p class="text-xs uppercase tracking-widest text-accent dark:text-accent-dark font-medium">Kompetensi</p>
 			<h2 class="font-serif text-3xl font-normal text-ink dark:text-dark-text">Keahlian &amp; Disiplin</h2>
 		</div>
 
 		<div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
 			<!-- Column 1 -->
-			<div class="p-6 rounded-2xl border border-light-border dark:border-dark-border bg-light-surface/30 dark:bg-dark-surface/30 space-y-3">
+			<div use:reveal={{ delay: 0, y: 20 }} class="p-6 rounded-2xl border border-light-border dark:border-dark-border bg-light-surface/30 dark:bg-dark-surface/30 space-y-3">
 				<h3 class="font-serif text-xl font-normal text-ink dark:text-dark-text">Design Systems</h3>
 				<ul class="space-y-2 text-sm text-light-muted dark:text-dark-muted font-light">
 					<li>— Modular Design Tokens</li>
@@ -117,7 +121,7 @@
 			</div>
 
 			<!-- Column 2 -->
-			<div class="p-6 rounded-2xl border border-light-border dark:border-dark-border bg-light-surface/30 dark:bg-dark-surface/30 space-y-3">
+			<div use:reveal={{ delay: 80, y: 20 }} class="p-6 rounded-2xl border border-light-border dark:border-dark-border bg-light-surface/30 dark:bg-dark-surface/30 space-y-3">
 				<h3 class="font-serif text-xl font-normal text-ink dark:text-dark-text">Frontend Engineering</h3>
 				<ul class="space-y-2 text-sm text-light-muted dark:text-dark-muted font-light">
 					<li>— SvelteKit &amp; Svelte 5 Runes</li>
@@ -128,7 +132,7 @@
 			</div>
 
 			<!-- Column 3 -->
-			<div class="p-6 rounded-2xl border border-light-border dark:border-dark-border bg-light-surface/30 dark:bg-dark-surface/30 space-y-3">
+			<div use:reveal={{ delay: 160, y: 20 }} class="p-6 rounded-2xl border border-light-border dark:border-dark-border bg-light-surface/30 dark:bg-dark-surface/30 space-y-3">
 				<h3 class="font-serif text-xl font-normal text-ink dark:text-dark-text">Performance &amp; Craft</h3>
 				<ul class="space-y-2 text-sm text-light-muted dark:text-dark-muted font-light">
 					<li>— Core Web Vitals Optimization</li>
@@ -143,9 +147,9 @@
 	<!-- Hairline Divider -->
 	<div class="w-full h-px bg-light-border dark:bg-dark-border"></div>
 
-	<!-- Experience Timeline (Hairline Rows) -->
+	<!-- Experience Timeline (Hairline Rows with Staggered Scroll Reveal) -->
 	<div class="space-y-6">
-		<div class="space-y-1">
+		<div use:reveal={{ delay: 0, y: 16 }} class="space-y-1">
 			<p class="text-xs uppercase tracking-widest text-accent dark:text-accent-dark font-medium">Perjalanan Karier</p>
 			<h2 class="font-serif text-3xl font-normal text-ink dark:text-dark-text">Riwayat Pengalaman</h2>
 		</div>
@@ -170,8 +174,8 @@
 					company: 'Kanso Creative Studio',
 					desc: 'Merancang identitas visual, komponen UI terstandarisasi, dan website editorial publikasi konten panjang.'
 				}
-			] as exp}
-				<div class="py-6 grid grid-cols-1 sm:grid-cols-12 gap-4 items-baseline">
+			] as exp, index}
+				<div use:reveal={{ delay: index * 90, y: 16 }} class="py-6 grid grid-cols-1 sm:grid-cols-12 gap-4 items-baseline">
 					<div class="sm:col-span-3 text-xs uppercase tracking-widest font-mono text-light-muted dark:text-dark-muted">
 						{exp.period}
 					</div>

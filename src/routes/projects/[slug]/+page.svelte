@@ -1,4 +1,6 @@
 <script>
+	import { reveal, curtainReveal, magnetic, parallax } from '$lib/animations';
+
 	let { data } = $props();
 	const Content = $derived(data.component);
 </script>
@@ -28,7 +30,7 @@
 		</a>
 	</div>
 
-	<!-- Project Header -->
+	<!-- Project Header with Curtain Reveal -->
 	<header class="space-y-6">
 		<div class="flex flex-wrap items-center gap-3 text-xs tracking-wider uppercase text-light-muted dark:text-dark-muted">
 			<span class="px-2.5 py-1 rounded border border-light-border dark:border-dark-border bg-light-surface/60 dark:bg-dark-surface/60 font-medium text-accent dark:text-accent-dark">
@@ -38,7 +40,7 @@
 			<span>{data.metadata.year}</span>
 		</div>
 
-		<h1 class="font-serif text-4xl sm:text-6xl font-normal text-ink dark:text-dark-text tracking-tight leading-[1.08]">
+		<h1 use:curtainReveal class="font-serif text-4xl sm:text-6xl font-normal text-ink dark:text-dark-text tracking-tight leading-[1.08]">
 			{data.metadata.title}
 		</h1>
 
@@ -50,8 +52,8 @@
 	<!-- Hairline Divider -->
 	<div class="w-full h-px bg-light-border dark:bg-dark-border"></div>
 
-	<!-- Project Metadata Matrix (Hairline Grid) -->
-	<div class="grid grid-cols-2 sm:grid-cols-4 gap-6 p-6 rounded-2xl border border-light-border dark:border-dark-border bg-light-surface/40 dark:bg-dark-surface/40">
+	<!-- Project Metadata Matrix with Scroll Reveal -->
+	<div use:reveal={{ delay: 60, y: 16 }} class="grid grid-cols-2 sm:grid-cols-4 gap-6 p-6 rounded-2xl border border-light-border dark:border-dark-border bg-light-surface/40 dark:bg-dark-surface/40">
 		<div class="space-y-1">
 			<p class="text-xs uppercase tracking-widest text-light-muted dark:text-dark-muted">Klien</p>
 			<p class="font-medium text-sm text-ink dark:text-dark-text">{data.metadata.client || 'Internal Project'}</p>
@@ -72,6 +74,7 @@
 			<div class="flex items-center gap-3 pt-0.5">
 				{#if data.metadata.demoUrl}
 					<a
+						use:magnetic={{ strength: 0.25 }}
 						href={data.metadata.demoUrl}
 						target="_blank"
 						rel="noopener noreferrer"
@@ -83,6 +86,7 @@
 				{/if}
 				{#if data.metadata.repoUrl}
 					<a
+						use:magnetic={{ strength: 0.25 }}
 						href={data.metadata.repoUrl}
 						target="_blank"
 						rel="noopener noreferrer"
@@ -97,7 +101,7 @@
 	</div>
 
 	<!-- Tech Stack Badges -->
-	<div class="flex flex-wrap items-center gap-2">
+	<div use:reveal={{ delay: 100, y: 14 }} class="flex flex-wrap items-center gap-2">
 		<span class="text-xs text-light-muted dark:text-dark-muted mr-2">Teknologi:</span>
 		{#each data.metadata.tags as tag}
 			<span class="px-3 py-1 rounded-full text-xs font-medium border border-light-border dark:border-dark-border bg-paper dark:bg-dark-bg text-ink/80 dark:text-dark-text/80">
@@ -106,21 +110,24 @@
 		{/each}
 	</div>
 
-	<!-- Hero Mockup Showcase -->
-	<figure class="rounded-2xl border border-light-border dark:border-dark-border overflow-hidden bg-light-surface dark:bg-dark-surface p-2 sm:p-4 shadow-sm">
-		<img
-			src={data.metadata.image}
-			alt="Pratinjau visual {data.metadata.title}"
-			class="w-full h-auto rounded-xl object-cover"
-			loading="eager"
-		/>
+	<!-- Hero Mockup Showcase with Scroll-based Parallax -->
+	<figure use:reveal={{ delay: 120, y: 20 }} class="rounded-2xl border border-light-border dark:border-dark-border overflow-hidden bg-light-surface dark:bg-dark-surface p-2 sm:p-4 shadow-sm">
+		<div class="overflow-hidden rounded-xl relative">
+			<img
+				use:parallax={{ speed: 36 }}
+				src={data.metadata.image}
+				alt="Pratinjau visual {data.metadata.title}"
+				class="w-full h-auto rounded-xl object-cover scale-[1.05]"
+				loading="eager"
+			/>
+		</div>
 	</figure>
 
 	<!-- Hairline Divider -->
 	<div class="w-full h-px bg-light-border dark:bg-dark-border"></div>
 
-	<!-- Markdown Case Study Content -->
-	<section class="prose-content max-w-none pt-2">
+	<!-- Markdown Case Study Content with Scroll Reveal -->
+	<section use:reveal={{ delay: 160, y: 20 }} class="prose-content max-w-none pt-2">
 		{#if Content}
 			<div class="space-y-6 text-ink/85 dark:text-dark-text/85 text-base sm:text-lg font-light leading-relaxed">
 				<Content />
@@ -128,7 +135,7 @@
 		{/if}
 	</section>
 
-	<!-- Bottom Navigation & Action Bar -->
+	<!-- Bottom Navigation & Action Bar with Magnetic Buttons -->
 	<div class="pt-12 mt-12 border-t border-light-border dark:border-dark-border flex flex-col sm:flex-row items-center justify-between gap-6">
 		<a
 			href="/projects/"
@@ -140,15 +147,17 @@
 		<div class="flex items-center gap-3">
 			{#if data.metadata.demoUrl}
 				<a
+					use:magnetic={{ strength: 0.3 }}
 					href={data.metadata.demoUrl}
 					target="_blank"
 					rel="noopener noreferrer"
-					class="px-5 py-2.5 rounded-lg bg-accent text-white hover:bg-accent-hover text-sm font-medium transition-colors"
+					class="px-5 py-2.5 rounded-lg bg-accent text-white hover:bg-accent-hover text-sm font-medium transition-colors shadow-sm"
 				>
 					Buka Demo ↗
 				</a>
 			{/if}
 			<a
+				use:magnetic={{ strength: 0.22 }}
 				href="/contact/"
 				class="px-5 py-2.5 rounded-lg border border-light-border dark:border-dark-border hover:border-accent dark:hover:border-accent-dark text-sm font-medium transition-colors"
 			>
