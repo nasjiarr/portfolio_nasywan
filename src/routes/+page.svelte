@@ -1,8 +1,18 @@
 <script>
 	import { reveal, magnetic, curtainReveal, wordReveal } from '$lib/animations';
 	import ResponsiveImage from '$lib/components/ResponsiveImage.svelte';
+	import CursorGlow from '$lib/components/CursorGlow.svelte';
+	import KineticTypography from '$lib/components/KineticTypography.svelte';
 
 	let { data } = $props();
+
+	// Daftar kata/role untuk kinetic typography di hero section (dapat disesuaikan)
+	const heroRoles = [
+		'Design Engineer',
+		'Frontend Architect',
+		'Creative Developer',
+		'Interface Craftsman'
+	];
 </script>
 
 <svelte:head>
@@ -15,16 +25,19 @@
 </svelte:head>
 
 <div class="space-y-12 sm:space-y-20 lg:space-y-28">
-	<!-- Hero Section with Scroll Reveal -->
-	<section use:reveal={{ delay: 0, y: 14 }} class="max-w-4xl space-y-6 sm:space-y-8 pt-2 sm:pt-6">
+	<!-- Hero Section with Scroll Reveal & Cursor Glow -->
+	<section use:reveal={{ delay: 0, y: 14 }} class="relative max-w-4xl space-y-6 sm:space-y-8 pt-2 sm:pt-6">
+		<!-- Cursor-Following Radial Glow (Disabled on touch devices & reduced motion) -->
+		<CursorGlow />
+
 		<!-- Status Indicator -->
-		<div class="inline-flex items-center gap-2.5 px-3.5 py-1 rounded-full border border-light-border dark:border-dark-border text-xs font-medium text-accent dark:text-accent-dark bg-accent-light/40 dark:bg-accent/15">
+		<div class="relative z-10 inline-flex items-center gap-2.5 px-3.5 py-1 rounded-full border border-light-border dark:border-dark-border text-xs font-medium text-accent dark:text-accent-dark bg-accent-light/40 dark:bg-accent/15">
 			<span class="w-1.5 h-1.5 rounded-full bg-accent dark:bg-accent-dark animate-pulse"></span>
 			<span>Tersedia untuk proyek terpilih &amp; kolaborasi</span>
 		</div>
 
 		<!-- Main Hero Headline with Per-word Blur-to-Focus Reveal -->
-		<div class="space-y-4 sm:space-y-6">
+		<div class="relative z-10 space-y-4 sm:space-y-6">
 			<h1
 				use:wordReveal={{ delay: 0.1, duration: 0.8 }}
 				class="font-serif text-3xl sm:text-5xl lg:text-7xl font-normal tracking-tight text-ink dark:text-dark-text leading-[1.12] sm:leading-[1.06]"
@@ -33,12 +46,12 @@
 			</h1>
 
 			<p class="font-sans text-base sm:text-xl lg:text-2xl text-light-muted dark:text-dark-muted font-light leading-relaxed max-w-2xl">
-				Saya seorang <span class="text-ink dark:text-dark-text font-normal">Design Technologist</span> yang berfokus pada tipografi editorial yang tenang, sistem desain modular, dan aplikasi web statis berkinerja tinggi.
+				Saya seorang <KineticTypography words={heroRoles} interval={2400} /> yang berfokus pada tipografi editorial yang tenang, sistem desain modular, dan aplikasi web statis berkinerja tinggi.
 			</p>
 		</div>
 
 		<!-- Action Links with Magnetic Button Effect & Mobile-friendly Touch Targets -->
-		<div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-2">
+		<div class="relative z-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-2">
 			<a
 				use:magnetic={{ strength: 0.3 }}
 				href="/projects/"
@@ -111,6 +124,7 @@
 									width={800}
 									height={550}
 									sizes="(max-width: 768px) 100vw, 33vw"
+									viewTransitionName="project-image-{project.slug}"
 								/>
 								<!-- Subtle dark gradient overlay appearing smoothly on hover -->
 								<div class="absolute inset-0 bg-gradient-to-t from-black/30 via-black/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>

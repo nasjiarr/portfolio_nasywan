@@ -126,6 +126,7 @@
 				sizes="(max-width: 896px) 100vw, 896px"
 				action={parallax}
 				actionParam={{ speed: 32 }}
+				viewTransitionName="project-image-{data.metadata.slug}"
 			/>
 		</div>
 	</figure>
@@ -142,8 +143,47 @@
 		{/if}
 	</section>
 
+	<!-- Next / Previous Project Navigation (Book-like horizontal transition) -->
+	{#if data.prevProject || data.nextProject}
+		<nav class="pt-8 sm:pt-10 border-t border-light-border dark:border-dark-border" aria-label="Navigasi Proyek Lainnya">
+			<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+				{#if data.prevProject}
+					<a
+						href="/projects/{data.prevProject.slug}/"
+						data-direction="prev"
+						class="touch-card group flex flex-col justify-between p-4 sm:p-5 rounded-2xl border border-light-border dark:border-dark-border bg-light-surface/40 dark:bg-dark-surface/40 hover:border-accent/40 dark:hover:border-accent-dark/40 transition-all duration-200"
+					>
+						<span class="text-xs text-light-muted dark:text-dark-muted flex items-center gap-1 group-hover:-translate-x-1 transition-transform duration-150">
+							← Proyek Sebelumnya
+						</span>
+						<span class="font-serif text-lg sm:text-xl font-normal text-ink dark:text-dark-text mt-2 group-hover:text-accent dark:group-hover:text-accent-dark transition-colors">
+							{data.prevProject.title}
+						</span>
+					</a>
+				{:else}
+					<div class="hidden sm:block"></div>
+				{/if}
+
+				{#if data.nextProject}
+					<a
+						href="/projects/{data.nextProject.slug}/"
+						data-direction="next"
+						class="touch-card group flex flex-col items-start sm:items-end justify-between sm:text-right p-4 sm:p-5 rounded-2xl border border-light-border dark:border-dark-border bg-light-surface/40 dark:bg-dark-surface/40 hover:border-accent/40 dark:hover:border-accent-dark/40 transition-all duration-200"
+					>
+						<span class="text-xs text-light-muted dark:text-dark-muted flex items-center gap-1 group-hover:translate-x-1 transition-transform duration-150">
+							Proyek Selanjutnya →
+						</span>
+						<span class="font-serif text-lg sm:text-xl font-normal text-ink dark:text-dark-text mt-2 group-hover:text-accent dark:group-hover:text-accent-dark transition-colors">
+							{data.nextProject.title}
+						</span>
+					</a>
+				{/if}
+			</div>
+		</nav>
+	{/if}
+
 	<!-- Bottom Navigation & Action Bar with Mobile-friendly Stack -->
-	<div class="pt-8 sm:pt-12 mt-8 sm:mt-12 border-t border-light-border dark:border-dark-border flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-between gap-4 sm:gap-6">
+	<div class="pt-6 sm:pt-8 border-t border-light-border dark:border-dark-border flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-between gap-4 sm:gap-6">
 		<a
 			href="/projects/"
 			class="inline-flex items-center justify-center sm:justify-start gap-2 text-sm text-light-muted dark:text-dark-muted hover:text-ink dark:hover:text-dark-text py-2"

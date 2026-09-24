@@ -3,10 +3,23 @@
 	import { onMount, onDestroy } from 'svelte';
 	import Navbar from '$lib/components/Navbar.svelte';
 	import Preloader from '$lib/components/Preloader.svelte';
+	import NavigationProgressBar from '$lib/components/NavigationProgressBar.svelte';
 	import { onNavigate } from '$app/navigation';
-	import { CustomCursor, initGSAP, initSmoothScroll, getLenis, destroySmoothScroll, shouldReduceMotion } from '$lib/animations';
+	import {
+		CustomCursor,
+		initGSAP,
+		initSmoothScroll,
+		getLenis,
+		destroySmoothScroll,
+		shouldReduceMotion
+	} from '$lib/animations';
+	import {
+		determineTransitionType,
+		setPageTransitioning
+	} from '$lib/animations/navigationCoordinator.js';
 
 	let { children } = $props();
+	let progressBar = $state(/** @type {any} */ (null));
 
 	onMount(() => {
 		initSmoothScroll();
@@ -17,38 +30,84 @@
 	});
 
 	onNavigate((navigation) => {
-		// Reset scroll position via Lenis or native
 		const lenis = getLenis();
-		if (lenis) {
-			lenis.scrollTo(0, { immediate: true });
-		} else if (typeof window !== 'undefined') {
-			window.scrollTo(0, 0);
-		}
 
-		// Refresh GSAP ScrollTrigger calculations on navigation
-		if (typeof window !== 'undefined') {
-			const gsapContext = initGSAP();
-			if (gsapContext) {
-				setTimeout(() => {
-					gsapContext.ScrollTrigger.refresh();
-				}, 120);
-			}
-		}
-
-		// Strictly respect prefers-reduced-motion setting
+		// Strictly respect prefers-reduced-motion setting: instant transition without animation
 		if (shouldReduceMotion()) {
+			if (lenis) {
+				lenis.scrollTo(0, { immediate: true });
+			} else if (typeof window !== 'undefined') {
+				window.scrollTo(0, 0);
+			}
 			return;
 		}
 
-		// Check for browser support of View Transitions API
+		// Start thin progress bar indicator (skips if transition completes in < 180ms)
+		progressBar?.start();
+		setPageTransitioning(true);
+
+		// Determine transition context (shared-project, project-slide-next, project-slide-prev, or page-slide)
+		const transitionType = determineTransitionType(
+			navigation.from?.url.pathname,
+			navigation.to?.url.pathname
+		);
+		document.documentElement.dataset.transition = transitionType;
+
+		// Smooth Lenis scroll reset: smoothly glide to top if scrolled, otherwise immediate
+		if (lenis) {
+			if (typeof window !== 'undefined' && window.scrollY > 120) {
+				lenis.scrollTo(0, { immediate: false, duration: 0.35 });
+			} else {
+				lenis.scrollTo(0, { immediate: true });
+			}
+		} else if (typeof window !== 'undefined') {
+			window.scrollTo({ top: 0, behavior: 'smooth' });
+		}
+
+		// Fallback for browsers without View Transitions API
+		// @ts-ignore
 		if (!document.startViewTransition) {
-			return;
+			return new Promise(async (resolve) => {
+				await navigation.complete;
+				delete document.documentElement.dataset.transition;
+				setPageTransitioning(false);
+				progressBar?.finish();
+
+				const main = document.getElementById('main-content');
+				if (main) main.focus({ preventScroll: true });
+				resolve();
+			});
 		}
 
+		// Native View Transitions API
+		// @ts-ignore
 		return new Promise((resolve) => {
-			document.startViewTransition(async () => {
+			// @ts-ignore
+			const transition = document.startViewTransition(async () => {
 				resolve();
 				await navigation.complete;
+			});
+
+			transition.finished.finally(() => {
+				delete document.documentElement.dataset.transition;
+				setPageTransitioning(false);
+				progressBar?.finish();
+
+				// Accessibility: Shift keyboard focus to the main content area of the new page
+				const main = document.getElementById('main-content');
+				if (main) {
+					main.focus({ preventScroll: true });
+				}
+
+				// Refresh GSAP ScrollTrigger calculations
+				if (typeof window !== 'undefined') {
+					const gsapContext = initGSAP();
+					if (gsapContext) {
+						setTimeout(() => {
+							gsapContext.ScrollTrigger.refresh();
+						}, 80);
+					}
+				}
 			});
 		});
 	});
@@ -59,6 +118,9 @@
 	<meta name="description" content="Personal portfolio and creative works" />
 </svelte:head>
 
+<!-- Top Thin Navigation Progress Indicator -->
+<NavigationProgressBar bind:this={progressBar} />
+
 <!-- First Load Monogram Preloader -->
 <Preloader />
 
@@ -68,7 +130,7 @@
 <div class="min-h-screen flex flex-col bg-paper text-ink dark:bg-dark-bg dark:text-dark-text selection:bg-accent-light dark:selection:bg-accent/30 selection:text-accent dark:selection:text-accent-dark transition-colors duration-200 overflow-x-clip">
 	<Navbar />
 
-	<main class="flex-1 w-full max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-12 md:py-16">
+	<main id="main-content" tabindex="-1" class="flex-1 w-full max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-12 md:py-16 focus:outline-none">
 		{@render children()}
 	</main>
 

@@ -10,6 +10,8 @@
 	 * @property {number} [width]
 	 * @property {number} [height]
 	 * @property {string} [sizes]
+	 * @property {string} [style]
+	 * @property {string} [viewTransitionName]
 	 * @property {((node: HTMLElement, param?: any) => any) | undefined} [action]
 	 * @property {any} [actionParam]
 	 */
@@ -19,6 +21,8 @@
 		src,
 		alt,
 		class: className = '',
+		style = '',
+		viewTransitionName = '',
 		loading = 'lazy',
 		fetchpriority = undefined,
 		decoding = 'async',
@@ -31,6 +35,13 @@
 
 	// Extract base path without extension
 	const basePath = $derived(src.replace(/\.(svg|webp|avif|png|jpg|jpeg)$/, ''));
+
+	// Combined inline style including view-transition-name
+	const computedStyle = $derived(
+		[style, viewTransitionName ? `view-transition-name: ${viewTransitionName};` : '']
+			.filter(Boolean)
+			.join(' ') || undefined
+	);
 
 	// Check if local project image with responsive variants
 	const isProjectImage = $derived(src.includes('/images/projects/'));
@@ -57,6 +68,7 @@
 				src="{basePath}.webp"
 				{alt}
 				class={className}
+				style={computedStyle}
 				{loading}
 				{fetchpriority}
 				{decoding}
@@ -68,6 +80,7 @@
 				src="{basePath}.webp"
 				{alt}
 				class={className}
+				style={computedStyle}
 				{loading}
 				{fetchpriority}
 				{decoding}
@@ -83,6 +96,7 @@
 			{src}
 			{alt}
 			class={className}
+			style={computedStyle}
 			{loading}
 			{fetchpriority}
 			{decoding}
@@ -94,6 +108,7 @@
 			{src}
 			{alt}
 			class={className}
+			style={computedStyle}
 			{loading}
 			{fetchpriority}
 			{decoding}

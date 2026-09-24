@@ -55,6 +55,7 @@
 								width={800}
 								height={500}
 								sizes="(max-width: 768px) 100vw, 50vw"
+								viewTransitionName="project-image-{project.slug}"
 							/>
 							<!-- Subtle gradient overlay on hover -->
 							<div class="absolute inset-0 bg-gradient-to-t from-black/30 via-black/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>

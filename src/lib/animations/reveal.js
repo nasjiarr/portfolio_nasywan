@@ -1,4 +1,5 @@
 import { shouldReduceMotion, onPortfolioReady } from './motionHelper.js';
+import { onPageSettled } from './navigationCoordinator.js';
 
 /**
  * @typedef {Object} RevealOptions
@@ -85,7 +86,9 @@ export function reveal(node, options = {}) {
 	};
 
 	onPortfolioReady(() => {
-		startObserving();
+		onPageSettled(() => {
+			startObserving();
+		});
 	});
 
 	return {
