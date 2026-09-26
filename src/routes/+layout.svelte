@@ -64,18 +64,48 @@
 			window.scrollTo({ top: 0, behavior: 'smooth' });
 		}
 
-		// Fallback for browsers without View Transitions API
+		// Fallback for browsers without View Transitions API (Smooth fade fallback)
 		// @ts-ignore
 		if (!document.startViewTransition) {
 			return new Promise(async (resolve) => {
+				const main = document.getElementById('main-content');
+				if (main) {
+					main.style.transition = 'opacity 160ms ease-out, transform 160ms ease-out';
+					main.style.opacity = '0';
+					main.style.transform = 'translateY(-12px)';
+					await new Promise((r) => setTimeout(r, 160));
+				}
+
+				resolve();
 				await navigation.complete;
+
+				// Scroll reset to top of new page
+				if (lenis) {
+					lenis.scrollTo(0, { immediate: true });
+				} else if (typeof window !== 'undefined') {
+					window.scrollTo(0, 0);
+				}
+
 				delete document.documentElement.dataset.transition;
 				setPageTransitioning(false);
 				progressBar?.finish();
 
-				const main = document.getElementById('main-content');
-				if (main) main.focus({ preventScroll: true });
-				resolve();
+				if (main) {
+					main.style.transform = 'translateY(16px)';
+					main.style.opacity = '0';
+					void main.offsetHeight; // Force reflow
+					main.style.transition = 'opacity 220ms ease-out, transform 220ms ease-out';
+					main.style.opacity = '1';
+					main.style.transform = 'translateY(0)';
+					main.focus({ preventScroll: true });
+					setTimeout(() => {
+						if (main) {
+							main.style.transition = '';
+							main.style.transform = '';
+							main.style.opacity = '';
+						}
+					}, 240);
+				}
 			});
 		}
 
@@ -86,12 +116,26 @@
 			const transition = document.startViewTransition(async () => {
 				resolve();
 				await navigation.complete;
+
+				// Reset scroll position to top of new page
+				if (lenis) {
+					lenis.scrollTo(0, { immediate: true });
+				} else if (typeof window !== 'undefined') {
+					window.scrollTo(0, 0);
+				}
 			});
 
 			transition.finished.finally(() => {
 				delete document.documentElement.dataset.transition;
 				setPageTransitioning(false);
 				progressBar?.finish();
+
+				// Ensure scroll position is reset at top of new page
+				if (lenis) {
+					lenis.scrollTo(0, { immediate: true });
+				} else if (typeof window !== 'undefined') {
+					window.scrollTo(0, 0);
+				}
 
 				// Accessibility: Shift keyboard focus to the main content area of the new page
 				const main = document.getElementById('main-content');
@@ -114,7 +158,7 @@
 </script>
 
 <svelte:head>
-	<title>Studio Folio — Portfolio</title>
+	<title>nasywandev — Software Engineering</title>
 	<meta name="description" content="Personal portfolio and creative works" />
 </svelte:head>
 
@@ -136,7 +180,7 @@
 
 	<footer class="w-full border-t border-light-border dark:border-dark-border py-8 pb-[max(2rem,env(safe-area-inset-bottom))] text-center text-xs text-light-muted dark:text-dark-muted transition-colors duration-200">
 		<div class="max-w-5xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-			<p>© {new Date().getFullYear()} Studio Folio. All rights reserved.</p>
+			<p>© {new Date().getFullYear()} nasywandev. All rights reserved.</p>
 			<p class="font-serif italic text-sm text-ink/70 dark:text-dark-text/70">Crafted with precision &amp; care</p>
 		</div>
 	</footer>

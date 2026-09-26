@@ -62,7 +62,7 @@
 	>
 		<!-- Top Status Bar -->
 		<div class="w-full flex items-center justify-between text-[11px] tracking-widest uppercase font-mono text-light-muted dark:text-dark-muted">
-			<span>Studio Folio</span>
+			<span>nasywandev</span>
 			<span class="text-accent dark:text-accent-dark">2026</span>
 		</div>
 
@@ -70,16 +70,16 @@
 		<div class="flex flex-col items-center text-center space-y-5">
 			<!-- Monogram Circle -->
 			<div class="w-16 h-16 rounded-full border border-light-border dark:border-dark-border flex items-center justify-center bg-light-surface/60 dark:bg-dark-surface/60 shadow-sm">
-				<span class="font-serif text-2xl text-accent dark:text-accent-dark tracking-tighter">SF</span>
+				<span class="font-serif text-2xl text-accent dark:text-accent-dark tracking-tighter">NJA</span>
 			</div>
 
 			<div class="space-y-1">
 				<p class="font-serif text-2xl sm:text-3xl text-ink dark:text-dark-text tracking-wide">
-					Nasywan Arsa
-				</p>
-				<p class="text-[11px] uppercase tracking-[0.28em] text-light-muted dark:text-dark-muted font-sans font-medium">
-					Design &amp; Architecture
-				</p>
+					Nasywan Jibran Aryadi
+					</p>
+					<p class="text-[11px] uppercase tracking-[0.28em] text-light-muted dark:text-dark-muted font-sans font-medium">
+					Software Engineering
+					</p>
 			</div>
 		</div>
 

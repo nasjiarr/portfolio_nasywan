@@ -8,18 +8,18 @@
 
 	// Daftar kata/role untuk kinetic typography di hero section (dapat disesuaikan)
 	const heroRoles = [
-		'Design Engineer',
-		'Frontend Architect',
-		'Creative Developer',
-		'Interface Craftsman'
+		'Software Engineer',
+		'Web Developer',
+		'Fullstack Developer',
+		'Laravel Specialist'
 	];
 </script>
 
 <svelte:head>
-	<title>Studio Folio — Design Engineer &amp; Frontend Architect</title>
-	<meta name="description" content="Personal portfolio of design systems, web engineering, and crafted digital experiences." />
-	<meta property="og:title" content="Studio Folio — Design Engineer & Frontend Architect" />
-	<meta property="og:description" content="Personal portfolio of design systems, web engineering, and crafted digital experiences." />
+	<title>nasywandev — Software Engineering Portfolio</title>
+	<meta name="description" content="Portofolio Nasywan Jibran Aryadi — software engineering, desain sistem, dan pengembangan aplikasi web modern." />
+	<meta property="og:title" content="nasywandev — Software Engineering Portfolio" />
+	<meta property="og:description" content="Portofolio Nasywan Jibran Aryadi — software engineering, desain sistem, dan pengembangan aplikasi web modern." />
 	<meta property="og:type" content="website" />
 	<meta name="twitter:card" content="summary_large_image" />
 </svelte:head>
@@ -42,11 +42,11 @@
 				use:wordReveal={{ delay: 0.1, duration: 0.8 }}
 				class="font-serif text-3xl sm:text-5xl lg:text-7xl font-normal tracking-tight text-ink dark:text-dark-text leading-[1.12] sm:leading-[1.06]"
 			>
-				Membangun ruang digital dengan presisi desain &amp; arsitektur kode modern.
+				Membangun solusi digital yang terstruktur, andal, dan siap berkembang.
 			</h1>
 
 			<p class="font-sans text-base sm:text-xl lg:text-2xl text-light-muted dark:text-dark-muted font-light leading-relaxed max-w-2xl">
-				Saya seorang <KineticTypography words={heroRoles} interval={2400} /> yang berfokus pada tipografi editorial yang tenang, sistem desain modular, dan aplikasi web statis berkinerja tinggi.
+				Saya seorang <KineticTypography words={heroRoles} interval={2400} /> yang berfokus pada arsitektur aplikasi yang terstruktur, kode yang andal, dan sistem web siap berkembang.
 			</p>
 		</div>
 

@@ -8,7 +8,7 @@
 	let message = $state('');
 
 	function copyEmail() {
-		navigator.clipboard.writeText('contact@domain.com');
+		navigator.clipboard.writeText('nasywanji@gmail.com');
 		copied = true;
 		setTimeout(() => {
 			copied = false;
@@ -22,15 +22,15 @@
 		const mailtoBody = encodeURIComponent(
 			`Halo,\n\nNama: ${name}\nEmail: ${email}\n\nPesan:\n${message}\n\nSalam,\n${name}`
 		);
-		window.location.href = `mailto:contact@domain.com?subject=${mailtoSubject}&body=${mailtoBody}`;
+		window.location.href = `mailto:nasywanji@gmail.com?subject=${mailtoSubject}&body=${mailtoBody}`;
 	}
 </script>
 
 <svelte:head>
-	<title>Contact — Studio Folio</title>
-	<meta name="description" content="Hubungi langsung untuk peluang proyek baru, konsultasi desain sistem, atau kolaborasi kreatif." />
-	<meta property="og:title" content="Contact — Studio Folio" />
-	<meta property="og:description" content="Hubungi langsung untuk peluang proyek baru, konsultasi desain sistem, atau kolaborasi kreatif." />
+	<title>Contact — nasywandev</title>
+	<meta name="description" content="Hubungi langsung untuk peluang proyek baru, konsultasi pengembangan, atau kolaborasi." />
+	<meta property="og:title" content="Contact — nasywandev" />
+	<meta property="og:description" content="Hubungi langsung untuk peluang proyek baru, konsultasi pengembangan, atau kolaborasi." />
 	<meta property="og:type" content="website" />
 </svelte:head>
 
@@ -62,13 +62,13 @@
 			<div class="p-5 sm:p-6 rounded-2xl border border-light-border dark:border-dark-border bg-light-surface/40 dark:bg-dark-surface/40 space-y-4">
 				<div class="space-y-1">
 					<p class="text-xs uppercase tracking-widest text-light-muted dark:text-dark-muted">Email Langsung</p>
-					<p class="font-serif text-xl sm:text-2xl text-ink dark:text-dark-text break-all">contact@domain.com</p>
+					<p class="font-serif text-xl sm:text-2xl text-ink dark:text-dark-text break-all">nasywanji@gmail.com</p>
 				</div>
 
 				<div class="flex flex-wrap items-center gap-2.5 pt-1">
 					<a
 						use:magnetic={{ strength: 0.25 }}
-						href="mailto:contact@domain.com"
+						href="mailto:nasywanji@gmail.com"
 						class="flex-1 sm:flex-none inline-flex items-center justify-center px-4 py-2.5 rounded-lg bg-accent text-white hover:bg-accent-hover text-xs font-medium transition-colors min-h-[44px]"
 					>
 						Kirim Email ↗
@@ -108,7 +108,7 @@
 				<p class="text-xs uppercase tracking-wider text-ink dark:text-dark-text font-medium mb-2">Jaringan Profesional</p>
 				<div class="space-y-0.5 text-sm">
 					<a
-						href="https://github.com"
+						href="https://github.com/nasjiarr"
 						target="_blank"
 						rel="noopener noreferrer"
 						class="flex items-center justify-between text-light-muted dark:text-dark-muted hover:text-ink dark:hover:text-dark-text transition-colors py-2.5 px-1 min-h-[44px] group"
@@ -117,7 +117,7 @@
 						<span class="text-xs group-hover:translate-x-0.5 transition-transform">↗</span>
 					</a>
 					<a
-						href="https://linkedin.com"
+						href="https://www.linkedin.com/in/nasywan-jibran-aryadi-7547a8214/"
 						target="_blank"
 						rel="noopener noreferrer"
 						class="flex items-center justify-between text-light-muted dark:text-dark-muted hover:text-ink dark:hover:text-dark-text transition-colors py-2.5 px-1 min-h-[44px] group"
@@ -125,16 +125,7 @@
 						<span>LinkedIn</span>
 						<span class="text-xs group-hover:translate-x-0.5 transition-transform">↗</span>
 					</a>
-					<a
-						href="https://x.com"
-						target="_blank"
-						rel="noopener noreferrer"
-						class="flex items-center justify-between text-light-muted dark:text-dark-muted hover:text-ink dark:hover:text-dark-text transition-colors py-2.5 px-1 min-h-[44px] group"
-					>
-						<span>Twitter / X</span>
-						<span class="text-xs group-hover:translate-x-0.5 transition-transform">↗</span>
-					</a>
-				</div>
+					</div>
 			</div>
 		</div>
 

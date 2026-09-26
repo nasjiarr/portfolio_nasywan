@@ -1,5 +1,6 @@
 <script>
 	import { page } from '$app/state';
+	import { afterNavigate } from '$app/navigation';
 	import ThemeToggle from './ThemeToggle.svelte';
 	import { onDestroy } from 'svelte';
 	import { fade } from 'svelte/transition';
@@ -12,6 +13,11 @@
 	];
 
 	let isMenuOpen = $state(false);
+	let pendingHref = $state('');
+
+	afterNavigate(() => {
+		pendingHref = '';
+	});
 
 	/** @param {string} href */
 	function isActive(href) {
@@ -62,9 +68,9 @@
 			class="group flex items-center gap-2 text-ink dark:text-dark-text font-serif text-2xl tracking-tight hover:text-accent dark:hover:text-accent-dark transition-colors py-2"
 		>
 			<span class="w-2.5 h-2.5 rounded-full bg-accent dark:bg-accent-dark inline-block transition-transform duration-300 group-hover:scale-125"></span>
-			<span class="font-normal">Studio</span>
+			<span class="font-normal">nasywan</span>
 			<span class="text-xs uppercase tracking-widest font-sans px-2 py-0.5 rounded border border-light-border dark:border-dark-border text-light-muted dark:text-dark-muted ml-0.5">
-				Folio
+				dev
 			</span>
 		</a>
 
@@ -75,9 +81,14 @@
 				{#each navItems as item}
 					<a
 						href={item.href}
+						onclick={() => {
+							pendingHref = item.href;
+						}}
 						class="nav-link-animated text-sm font-medium transition-colors duration-150 {isActive(item.href)
 							? 'active text-accent dark:text-accent-dark font-semibold'
-							: 'text-light-muted dark:text-dark-muted hover:text-ink dark:hover:text-dark-text'}"
+							: pendingHref === item.href
+								? 'is-pending text-accent dark:text-accent-dark'
+								: 'text-light-muted dark:text-dark-muted hover:text-ink dark:hover:text-dark-text'}"
 						aria-current={isActive(item.href) ? 'page' : undefined}
 					>
 						{item.name}
@@ -127,10 +138,13 @@
 			{#each navItems as item}
 				<a
 					href={item.href}
-					onclick={closeMenu}
+					onclick={() => {
+						pendingHref = item.href;
+						closeMenu();
+					}}
 					class="group flex items-center justify-between py-4 border-b border-light-border/60 dark:border-dark-border/60 text-ink dark:text-dark-text transition-colors duration-150 min-h-[56px] {isActive(
 						item.href
-					)
+					) || pendingHref === item.href
 						? 'text-accent dark:text-accent-dark font-medium'
 						: 'hover:text-accent dark:hover:text-accent-dark'}"
 					aria-current={isActive(item.href) ? 'page' : undefined}
@@ -164,7 +178,7 @@
 
 			<div class="flex items-center justify-between gap-4">
 				<a
-					href="mailto:contact@domain.com"
+					href="mailto:nasywanji@gmail.com"
 					onclick={closeMenu}
 					class="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-accent text-white hover:bg-accent-hover font-medium text-sm transition-colors min-h-[46px]"
 				>

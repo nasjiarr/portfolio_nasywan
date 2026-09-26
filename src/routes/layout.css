@@ -208,22 +208,22 @@ button:active {
   }
 }
 
-/* 1. General Page Navigation: Cross-Fade with Subtle Vertical Slide (400-600ms) */
+/* 1. General Page Navigation: Cross-Fade with Subtle Vertical Slide & Scale (400-500ms) */
 @keyframes vt-page-slide-out {
   from {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
   to {
     opacity: 0;
-    transform: translateY(-14px);
+    transform: translateY(-20px) scale(0.98);
   }
 }
 
 @keyframes vt-page-slide-in {
   from {
     opacity: 0;
-    transform: translateY(18px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
@@ -238,7 +238,19 @@ html:not([data-transition])::view-transition-old(main-content) {
 
 html[data-transition="page-slide"]::view-transition-new(main-content),
 html:not([data-transition])::view-transition-new(main-content) {
-  animation: 480ms cubic-bezier(0.16, 1, 0.3, 1) both vt-page-slide-in;
+  animation: 460ms cubic-bezier(0.16, 1, 0.3, 1) both vt-page-slide-in;
+}
+
+.nav-link-animated:active,
+.nav-link-animated.is-pending {
+  color: var(--color-accent) !important;
+  opacity: 0.85;
+}
+
+html.dark .nav-link-animated:active,
+html.dark .nav-link-animated.is-pending {
+  color: var(--color-accent-dark) !important;
+  opacity: 0.9;
 }
 
 /* 2. Shared Element Transition: Project Card <-> Project Detail Hero Image */

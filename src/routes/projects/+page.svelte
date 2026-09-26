@@ -6,10 +6,10 @@
 </script>
 
 <svelte:head>
-	<title>Projects — Studio Folio</title>
-	<meta name="description" content="Arsip kurasi karya desain sistem, web application, dan eksplorasi antarmuka digital." />
-	<meta property="og:title" content="Projects — Studio Folio" />
-	<meta property="og:description" content="Arsip kurasi karya desain sistem, web application, dan eksplorasi antarmuka digital." />
+	<title>Projects — nasywandev</title>
+	<meta name="description" content="Arsip karya pengembangan aplikasi web, desain sistem, dan eksplorasi antarmuka digital." />
+	<meta property="og:title" content="Projects — nasywandev" />
+	<meta property="og:description" content="Arsip karya pengembangan aplikasi web, desain sistem, dan eksplorasi antarmuka digital." />
 	<meta property="og:type" content="website" />
 </svelte:head>
 

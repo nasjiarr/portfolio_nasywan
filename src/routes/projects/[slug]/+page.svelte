@@ -7,14 +7,14 @@
 </script>
 
 <svelte:head>
-	<title>{data.metadata.title} — Studio Folio</title>
+	<title>{data.metadata.title} — nasywandev</title>
 	<meta name="description" content={data.metadata.description} />
-	<meta property="og:title" content="{data.metadata.title} — Studio Folio" />
+	<meta property="og:title" content="{data.metadata.title} — nasywandev" />
 	<meta property="og:description" content={data.metadata.description} />
 	<meta property="og:image" content={data.metadata.image} />
 	<meta property="og:type" content="article" />
 	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content="{data.metadata.title} — Studio Folio" />
+	<meta name="twitter:title" content="{data.metadata.title} — nasywandev" />
 	<meta name="twitter:description" content={data.metadata.description} />
 	<meta name="twitter:image" content={data.metadata.image} />
 </svelte:head>
