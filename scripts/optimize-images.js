@@ -3,7 +3,10 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const dir = path.resolve('static/images/projects');
-const files = ['editorial', 'fintech', 'commerce'];
+const files = fs
+	.readdirSync(dir)
+	.filter((f) => f.endsWith('.svg'))
+	.map((f) => f.replace(/\.svg$/, ''));
 const sizes = [400, 800, 1200];
 
 async function convert() {
